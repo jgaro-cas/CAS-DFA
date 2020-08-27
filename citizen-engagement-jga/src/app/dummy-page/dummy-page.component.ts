@@ -8,6 +8,11 @@ import { IssueType } from '../models/issue-type';
 import { IssueService } from '../api/services/issue.service';
 import { Issue } from '../models/issue';
 import { PaginationStructure } from '../models/pagination-structure';
+import { IssueActionsRequest } from '../models/issue-actions-request';
+import { ActionStructure } from '../models/action-structure';
+import { partitionArray } from '@angular/compiler/src/util';
+import { CommentsRequest } from '../models/comments-request';
+import { CommentStructure } from '../models/comment-structure';
 
 @Component({
   selector: 'app-dummy-page',
@@ -193,5 +198,82 @@ export class DummyPageComponent implements OnInit {
       next: (result) => console.log("Issue :", result),
       error: (error) => console.log("Error", error)
     });
+  }
+
+  updateIssue(){
+    let id : string = "5f3969f64884d70016a5a2fd";
+
+    let geoJsonLocation = { "coordinates" : [46.913757, 6.968630],
+                            "type" : "Point"
+                          }; 
+
+    let issue = new Issue();
+    issue.description = "Première issue éditée";
+    issue.issueTypeHref = "/api/issueTypes/5f395cdf00ff2f00168d6425";
+    issue.location = geoJsonLocation;
+    issue.tags = ["#MaPremièreIssue", "#CestUnTest"];
+                          
+    this.issueService.updateIssue(id, issue).subscribe({
+      next: (result) => console.log("Issue editée :", result),
+      error: (error) => console.log("Error", error)
+    });
+
+  }
+
+  deleteIssue(){
+    let id : string = "5f39695e4884d70016a5a2fb";
+
+    this.issueService.deleteIssue(id).subscribe({
+      next: (result) => console.log("Issue supprimée :", result),
+      error: (error) => console.log("Error", error)
+    })
+  }
+
+  loadIssueAction(){
+    let id : string = "5f4288255931820016abd279";
+    let param = new IssueActionsRequest;
+    param.pagination = this.testPagination;
+
+    this.issueService.loadIssueActions(id, param).subscribe({
+      next: (result) => console.log("Actions de l'issue :", result),
+      error: (error) => console.log("Error", error)
+    });
+  }
+
+  createIssueAction(){
+    let id : string = "5f4288255931820016abd279";
+    let action : ActionStructure = {
+      reason : "parce que 2",
+      type : "reject"
+    };
+
+    this.issueService.createIssueAction(id, action).subscribe({
+      next: (result) => console.log("Actions crée :", result),
+      error: (error) => console.log("Error", error)
+    });
+  }
+
+  loadIssueComment(){
+    let id : string = "5f4288255931820016abd279";
+    let param : CommentsRequest = {
+      pagination : this.testPagination,
+      include : ["author"]};
+
+    this.issueService.loadIssueComment(id, param).subscribe({
+      next: (result) => console.log("Commantaires :", result),
+      error: (error) => console.log("Error", error)
+    })
+  }
+
+  createIssueComment(){
+    let id : string = "5f4288255931820016abd279";
+    let param : CommentStructure = {text : "Arf trop tard..."};
+
+    this.issueService.createIssueComment(id, param).subscribe({
+      next: (result) => console.log("Nouveau commentaire :", result),
+      error: (error) => console.log("Error", error)
+    })
+  
+  
   }
 }

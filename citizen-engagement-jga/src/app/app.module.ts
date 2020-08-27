@@ -10,11 +10,13 @@ import { DummyPageComponent } from './dummy-page/dummy-page.component';
 import { FormsModule } from '@angular/forms';
 import { SecurityModule } from './security/security.module';
 import { ApiTokenInterceptorService } from './api/api-token-interceptor.service';
+import { PageAccueilComponent } from './pages/page-accueil/page-accueil.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DummyPageComponent
+    DummyPageComponent,
+    PageAccueilComponent
   ],
   imports: [
     BrowserModule,
