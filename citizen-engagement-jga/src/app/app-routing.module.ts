@@ -3,12 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginPageComponent } from './security/login-page/login-page.component';
 import { DummyPageComponent } from './dummy-page/dummy-page.component';
 import { AuthGuard } from './security/guards/auth.guard';
+import { PageAccueilComponent } from './pages/page-accueil/page-accueil.component';
 
 
 const routes: Routes = [
-  {path: "", redirectTo: "dummy", pathMatch: "full"},
+  {path: "", redirectTo: "Accueil", pathMatch: "full"},
   {path: "login", component: LoginPageComponent},
-  {path: "dummy", component: DummyPageComponent, canActivate: [AuthGuard]}
+  {path: "Accueil", component: PageAccueilComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
