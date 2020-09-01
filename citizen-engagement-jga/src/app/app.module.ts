@@ -12,6 +12,8 @@ import { SecurityModule } from './security/security.module';
 import { ApiTokenInterceptorService } from './api/api-token-interceptor.service';
 import { PageAccueilComponent } from './pages/page-accueil/page-accueil.component';
 
+import {MatSidenavModule, MatSidenavContainer, MatSidenavContent} from '@angular/material/sidenav'; 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +26,10 @@ import { PageAccueilComponent } from './pages/page-accueil/page-accueil.componen
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
-    SecurityModule
+    SecurityModule,
+    MatSidenavModule,
+    MatSidenavContainer,
+    MatSidenavContent
   ],
   providers: [{provide : HTTP_INTERCEPTORS,
                 useClass : ApiTokenInterceptorService,

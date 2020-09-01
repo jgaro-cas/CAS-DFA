@@ -13,6 +13,7 @@ import { ActionStructure } from '../models/action-structure';
 import { partitionArray } from '@angular/compiler/src/util';
 import { CommentsRequest } from '../models/comments-request';
 import { CommentStructure } from '../models/comment-structure';
+import { MatMenu } from "@angular/material/menu";
 
 @Component({
   selector: 'app-dummy-page',
