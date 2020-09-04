@@ -1,9 +1,20 @@
-<header color="primary"> 
-  CITIZEN ENGAGEMENT  
-</header>
-  <mat-sidenav>
-    MENU
+<mat-toolbar color="primary">
+CITIZEN ENGAGEMENT
+</mat-toolbar>
+
+
+<mat-sidenav-container class="main-app-container">
+  <mat-sidenav mode="side" opened position="start">
+    <p>MENU</p>
+    <mat-list role="list">
+      <mat-list-item mat-raised-button routerLink="me">ME</mat-list-item>
+      <app-logout-button></app-logout-button>
+    </mat-list>
   </mat-sidenav>
-
-
-  
+  <mat-sidenav-content>
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+    
+  </mat-sidenav-content>
+</mat-sidenav-container>

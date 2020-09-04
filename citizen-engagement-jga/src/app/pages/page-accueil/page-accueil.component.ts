@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatMenu } from '@angular/material/menu';
 
 
 
@@ -9,10 +8,12 @@ import { MatMenu } from '@angular/material/menu';
   styleUrls: ['./page-accueil.component.scss']
 })
 export class PageAccueilComponent implements OnInit {
+  private loged : boolean = false;
 
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }

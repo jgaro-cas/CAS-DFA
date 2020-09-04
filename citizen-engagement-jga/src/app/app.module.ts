@@ -10,15 +10,20 @@ import { DummyPageComponent } from './dummy-page/dummy-page.component';
 import { FormsModule } from '@angular/forms';
 import { SecurityModule } from './security/security.module';
 import { ApiTokenInterceptorService } from './api/api-token-interceptor.service';
-import { PageAccueilComponent } from './pages/page-accueil/page-accueil.component';
 
-import {MatSidenavModule} from '@angular/material/sidenav'; 
+// Angular material components
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from "@angular/material/list";
+// Pages
+import { PageAccueilComponent } from './pages/page-accueil/page-accueil.component';
+import {} from './pages/me-page/me-page.module'
 
 @NgModule({
   declarations: [
     AppComponent,
     DummyPageComponent,
-    PageAccueilComponent
+    PageAccueilComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,7 +32,9 @@ import {MatSidenavModule} from '@angular/material/sidenav';
     HttpClientModule,
     FormsModule,
     SecurityModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatListModule,
+    MatToolbarModule
   ],
   providers: [{provide : HTTP_INTERCEPTORS,
                 useClass : ApiTokenInterceptorService,
