@@ -1,8 +1,37 @@
 <h1>Vos informations personnelles</h1>
 
 <form #meForm="ngForm" (submit)=onSubmit(meForm.value)>
-  <mat-form-field apparence="outline">
-    <mat-label>Your name</mat-label>
-    <input matInput placeholder="Name">
+  <mat-form-field apparence="outline" hintLabel="Max 25 characters">
+    <mat-label>Nom d'utilisateur</mat-label>
+    <input matInput #input placeholder="UserName" type="text" maxlength="25" >
+    <mat-hint align="end">{{ input.value.length || 0 }} /25</mat-hint>
   </mat-form-field>
+
+  <mat-form-field apparence="outline" hintLabel="Max 25 characters">
+    <mat-label>Prénom</mat-label>
+    <input matInput #inputFName placeholder="Prénom" type="text" maxlength="25" minlength="2">
+    <mat-hint align="end">{{ inputFName.value.length || 0 }} /25</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field apparence="outline" hintLabel="Max 25 characters">
+    <mat-label>Nom de famille</mat-label>
+    <input matInput #inputFName placeholder="Nom de famille" type="text" maxlength="25" minlength="2">
+    <mat-hint align="end">{{ inputFName.value.length || 0 }} /25</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field apparence="outline" hintLabel="Format +XX">
+    <mat-label>Téléphone</mat-label>
+    <input matInput #inputFName placeholder="+41 XX XXX XX XX" type="tel" maxlength="16" minlength="16">
+    <mat-hint align="end">{{ inputFName.value.length || 0 }} /25</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field apparence="outline">
+    <mat-label>Role</mat-label>
+    <mat-select>
+      <mat-option value="optionCitizen">Citoyen</mat-option>
+    </mat-select>
+  </mat-form-field>
+  
+  
+
 </form>

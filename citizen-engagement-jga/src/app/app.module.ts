@@ -15,6 +15,7 @@ import { ApiTokenInterceptorService } from './api/api-token-interceptor.service'
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from "@angular/material/list";
+import { MatSelectModule } from "@angular/material/select";
 // Pages
 import { PageAccueilComponent } from './pages/page-accueil/page-accueil.component';
 import {} from './pages/me-page/me-page.module'
@@ -34,7 +35,8 @@ import {} from './pages/me-page/me-page.module'
     SecurityModule,
     MatSidenavModule,
     MatListModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatSelectModule
   ],
   providers: [{provide : HTTP_INTERCEPTORS,
                 useClass : ApiTokenInterceptorService,

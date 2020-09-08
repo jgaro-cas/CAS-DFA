@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from "@angular/forms";
+import { MeService } from 'src/app/api/services/me.service';
 
 @Component({
   selector: 'app-me-page',
@@ -10,10 +11,14 @@ import { NgForm } from "@angular/forms";
 export class MePageComponent implements OnInit {
 
   meForm;
+  
 
-  constructor() { }
+  constructor(private meService : MeService) { 
+
+   }
 
   ngOnInit(): void {
+
   }
 
   onSubmit(meDatas){
