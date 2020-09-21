@@ -5,7 +5,7 @@ import { DummyPageComponent } from './dummy-page/dummy-page.component';
 import { AuthGuard } from './security/guards/auth.guard';
 import { PageAccueilComponent } from './pages/page-accueil/page-accueil.component';
 import { MePageComponent } from './pages/me-page/me-page.component';
-
+import { UsersListComponent } from "./pages/users/users-list/users-list.component";
 
 const routes: Routes = [
   {path: "", redirectTo: "Accueil", pathMatch: "full"},
@@ -14,7 +14,8 @@ const routes: Routes = [
     component: PageAccueilComponent,
     children: [
       {path: "login", component: LoginPageComponent},
-      {path: "me", component: MePageComponent, canActivate: [AuthGuard]}
+      {path: "me", component: MePageComponent, canActivate: [AuthGuard]},
+      {path: "users", component: UsersListComponent, canActivate: [AuthGuard]},
     ]}
 ];
 

@@ -1,24 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MePageComponent } from './me-page.component';
+import { UsersListComponent } from './users-list/users-list.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule} from '@angular/forms';
 import { MatInputModule } from "@angular/material/input";
-import { MatSelectModule } from "@angular/material/select";
 import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatPaginatorModule } from "@angular/material/paginator";
+
 
 @NgModule({
-  declarations: [MePageComponent],
+  declarations: [UsersListComponent],
   imports: [
     CommonModule,
     FormsModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule,
-    MatCheckboxModule
-  ],
-  exports: [MePageComponent]
+    MatCheckboxModule,
+    MatPaginatorModule
+  ]
 })
-export class MePageModule { }
+export class UsersModule { }

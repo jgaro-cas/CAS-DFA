@@ -17,7 +17,7 @@ export class IssueService {
 
   constructor(private http : HttpClient) { }
 
-  loadAllIssues(params : IssueListRequestParam) : Observable<Issue[]>{
+  loadAllIssues(params : IssueListRequestParam) : Observable<any>{
     let stateParam : string;
     let includeParam : string;
     let requestString  : string = `?${params.pagination.getIssueRequest()}`;
@@ -45,7 +45,7 @@ export class IssueService {
     requestString += stateParam;
     requestString += includeParam;
 
-    return this.http.get<Issue[]>(`${environment.apiUrl}/issues${requestString}`);
+    return this.http.get<any>(`${environment.apiUrl}/issues${requestString}`, {observe : "response"});
   }
 
   createNewIssue(param : Issue) : Observable<Issue>{

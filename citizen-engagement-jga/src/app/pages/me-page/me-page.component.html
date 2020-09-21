@@ -1,37 +1,37 @@
 <h1>Vos informations personnelles</h1>
 
-<form #meForm="ngForm" (submit)=onSubmit(meForm.value)>
+<form #meForm="ngForm" (submit)=onSubmit(meForm)>
   <mat-form-field apparence="outline" hintLabel="Max 25 characters">
     <mat-label>Nom d'utilisateur</mat-label>
-    <input matInput #input placeholder="UserName" type="text" maxlength="25" >
+    <input matInput #input placeholder="UserName" type="text" maxlength="25" [(ngModel)]="user.name" name="name" [disabled]="!editMode" required>
     <mat-hint align="end">{{ input.value.length || 0 }} /25</mat-hint>
   </mat-form-field>
 
   <mat-form-field apparence="outline" hintLabel="Max 25 characters">
     <mat-label>Prénom</mat-label>
-    <input matInput #inputFName placeholder="Prénom" type="text" maxlength="25" minlength="2">
+    <input matInput #inputFName placeholder="Prénom" type="text" maxlength="25" minlength="2" [(ngModel)]="user.firstname" name="firstName" [disabled]="!editMode" required>
     <mat-hint align="end">{{ inputFName.value.length || 0 }} /25</mat-hint>
   </mat-form-field>
 
   <mat-form-field apparence="outline" hintLabel="Max 25 characters">
     <mat-label>Nom de famille</mat-label>
-    <input matInput #inputFName placeholder="Nom de famille" type="text" maxlength="25" minlength="2">
+    <input matInput #inputFName placeholder="Nom de famille" type="text" maxlength="25" minlength="2" [(ngModel)]="user.lastname" name="lastName" [disabled]="!editMode" required>
     <mat-hint align="end">{{ inputFName.value.length || 0 }} /25</mat-hint>
   </mat-form-field>
 
   <mat-form-field apparence="outline" hintLabel="Format +XX">
     <mat-label>Téléphone</mat-label>
-    <input matInput #inputFName placeholder="+41 XX XXX XX XX" type="tel" maxlength="16" minlength="16">
+    <input matInput #inputFName placeholder="+41 XX XXX XX XX" type="tel" maxlength="16" minlength="16" [(ngModel)]="user.phone" name="phone" [disabled]="!editMode">
     <mat-hint align="end">{{ inputFName.value.length || 0 }} /25</mat-hint>
   </mat-form-field>
 
-  <mat-form-field apparence="outline">
-    <mat-label>Role</mat-label>
-    <mat-select>
-      <mat-option value="optionCitizen">Citoyen</mat-option>
-    </mat-select>
-  </mat-form-field>
-  
-  
+  <section>
+    <p>Role</p>
+    <mat-checkbox [disabled]="!editMode || !roleStaff" [checked]="roleCitizen">Utilisateur</mat-checkbox>
+    <mat-checkbox [disabled]="!editMode || !roleStaff" [checked]="roleStaff">Administrateur</mat-checkbox>
+  </section>
+
+  <button mat-raised-button [color]="editButtonColor" (click)="setEditMode()">{{editButtonText}}</button>
+  <button mat-raised-button style="background-color: green; color: white;" *ngIf="editMode">test</button>
 
 </form>

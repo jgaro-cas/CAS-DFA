@@ -12,8 +12,8 @@ export class UsersManagementService {
 
   constructor(private http : HttpClient) { }
 
-  loadAllUsers(params : PaginationStructure) : Observable<User[]>{
-    return this.http.get<User[]>(`${environment.apiUrl}/users?${params.getUserRequest()}`);
+  loadAllUsers(params : PaginationStructure) : Observable<any>{
+    return this.http.get<any>(`${environment.apiUrl}/users?${params.getUserRequest()}`, {observe: 'response'});
   }
 
   createUser(userDefinition : User) : Observable<User>{
