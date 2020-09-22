@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { UsersManagementService } from 'src/app/api/services/users-management.service';
 import { PaginationStructure } from 'src/app/models/pagination-structure';
 import { User } from 'src/app/models/user';
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faUser,faUserEdit, faPhoneAlt } from "@fortawesome/free-solid-svg-icons";
 
 
 
@@ -15,6 +15,8 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 export class UsersListComponent implements OnInit {
 
   faUser = faUser;
+  faUserEdit = faUserEdit;
+  faPhoneAlt = faPhoneAlt;
 
   userList : User[];
   public paginationLocale = new PaginationStructure;
@@ -53,5 +55,16 @@ export class UsersListComponent implements OnInit {
 
   getUserPresentation(user : User){
     return user.firstname + " " + user.lastname;
+  }
+
+  getUserPhone(user : User){
+    return user.phone;
+  }
+
+  getClassIcon(user : User){
+    let iconClass = "";
+    iconClass += user.roles.indexOf("citizen") > -1 ? "citizenIcon " : "";
+    iconClass += user.roles.indexOf("staff") > -1 ? "staffIcon " : "";
+    return iconClass;
   }
 }

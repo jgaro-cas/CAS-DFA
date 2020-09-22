@@ -1,12 +1,20 @@
 <h1>Liste des utilisateurs</h1>
 
-<mat-card>
-    <mat-card-header style="background-color: black; color: white;">
-        <mat-card-title>Liste des utilisateurs</mat-card-title>
-    </mat-card-header>  
+<mat-card class="card">
+ 
     <mat-card-content *ngFor="let user of userList">
-        <fa-icon [icon]="faUser"></fa-icon>
-        <span>{{ getUserPresentation(user) }}</span>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <fa-icon [ngClass]="getClassIcon(user)" [icon]="faUser"></fa-icon>
+                    <span>{{ getUserPresentation(user) }}</span>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <P><fa-icon [icon]="faPhoneAlt"></fa-icon> {{ getUserPhone(user) }}</P>
+            <mat-action-row>
+                <button mat-raised-button><fa-icon [icon]="faUserEdit"></fa-icon></button>
+            </mat-action-row>
+        </mat-expansion-panel>
     </mat-card-content>
     <mat-card-footer>
         <mat-paginator></mat-paginator>

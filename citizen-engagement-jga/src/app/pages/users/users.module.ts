@@ -9,6 +9,7 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatCardModule } from "@angular/material/card";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { MatExpansionModule } from '@angular/material/expansion'; 
 
 @NgModule({
   declarations: [UsersListComponent],
@@ -21,7 +22,8 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
     MatCheckboxModule,
     MatPaginatorModule,
     MatCardModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatExpansionModule
   ]
 })
 export class UsersModule { }
