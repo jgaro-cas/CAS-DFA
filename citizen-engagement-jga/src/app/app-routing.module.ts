@@ -6,6 +6,8 @@ import { AuthGuard } from './security/guards/auth.guard';
 import { PageAccueilComponent } from './pages/page-accueil/page-accueil.component';
 import { MePageComponent } from './pages/me-page/me-page.component';
 import { UsersListComponent } from "./pages/users/users-list/users-list.component";
+import { UserPageComponent } from './pages/users/user-page/user-page.component';
+import { User } from './models/user';
 
 const routes: Routes = [
   {path: "", redirectTo: "Accueil", pathMatch: "full"},
@@ -17,6 +19,7 @@ const routes: Routes = [
       {path: "login", component: LoginPageComponent},
       {path: "me", component: MePageComponent, canActivate: [AuthGuard]},
       {path: "users", component: UsersListComponent, canActivate: [AuthGuard]},
+      {path: "user-page",component: UserPageComponent, canActivate: [AuthGuard]}
     ]}
 ];
 

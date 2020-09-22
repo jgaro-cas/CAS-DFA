@@ -9,10 +9,11 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatCardModule } from "@angular/material/card";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { MatExpansionModule } from '@angular/material/expansion'; 
+import { MatExpansionModule } from '@angular/material/expansion';
+import { UserPageComponent } from './user-page/user-page.component'; 
 
 @NgModule({
-  declarations: [UsersListComponent],
+  declarations: [UsersListComponent, UserPageComponent],
   imports: [
     CommonModule,
     FormsModule,

@@ -25,7 +25,7 @@
         </mat-expansion-panel-header>
         <p><fa-icon [icon]="faPhoneAlt"></fa-icon>{{ getUserPhone(user) }}</p>
         <mat-action-row>
-          <button mat-raised-button><fa-icon [icon]="faUserEdit"></fa-icon></button>
+          <button mat-raised-button (click)="jumpToUserEdition(user)"><fa-icon [icon]="faUserEdit"></fa-icon></button>
         </mat-action-row>
       </mat-expansion-panel>
     </mat-card-content>

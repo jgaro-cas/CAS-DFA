@@ -4,6 +4,7 @@ import { UsersManagementService } from 'src/app/api/services/users-management.se
 import { PaginationStructure } from 'src/app/models/pagination-structure';
 import { User } from 'src/app/models/user';
 import { faUser,faUserEdit, faPhoneAlt, faUserPlus } from "@fortawesome/free-solid-svg-icons";
+import { Router } from '@angular/router';
 
 
 
@@ -24,7 +25,7 @@ export class UsersListComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator : MatPaginator;
 
-  constructor(private userManagementService : UsersManagementService) { }
+  constructor(private userManagementService : UsersManagementService, private router: Router) { }
 
   ngOnInit(): void {
       this.paginationLocale.page = 1;
@@ -74,7 +75,7 @@ export class UsersListComponent implements OnInit {
   }
 
   jumpToUserEdition(user: User){
-    ;
+    this.router.navigate(["/Accueil/user-page"], {state: {id:1, user: user}});
   }
 
   jumpToUserCreation(){
