@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { environment } from 'src/environments/environment';
@@ -12,8 +12,8 @@ export class UsersManagementService {
 
   constructor(private http : HttpClient) { }
 
-  loadAllUsers(params : PaginationStructure) : Observable<any>{
-    return this.http.get<any>(`${environment.apiUrl}/users?${params.getUserRequest()}`, {observe: 'response'});
+  loadAllUsers(params : PaginationStructure) : Observable<HttpResponse<User[]>>{
+    return this.http.get<User[]>(`${environment.apiUrl}/users?${params.getUserRequest()}`, {observe: 'response'}); 
   }
 
   createUser(userDefinition : User) : Observable<User>{
