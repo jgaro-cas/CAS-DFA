@@ -18,12 +18,12 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
+
 // Pages
 import { DummyPageComponent } from './dummy-page/dummy-page.component';
 import { PageAccueilComponent } from './pages/page-accueil/page-accueil.component';
 import {} from './pages/me-page/me-page.module';
 import {} from './pages/users/users.module';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatCheckboxModule,
     MatFormFieldModule,
     MatPaginatorModule,
-    FontAwesomeModule,
   ],
   providers: [{provide : HTTP_INTERCEPTORS,
                 useClass : ApiTokenInterceptorService,
