@@ -23,6 +23,7 @@ import { DummyPageComponent } from './dummy-page/dummy-page.component';
 import { PageAccueilComponent } from './pages/page-accueil/page-accueil.component';
 import {} from './pages/me-page/me-page.module';
 import {} from './pages/users/users.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import {} from './pages/users/users.module';
     MatSelectModule,
     MatCheckboxModule,
     MatFormFieldModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    FontAwesomeModule,
   ],
   providers: [{provide : HTTP_INTERCEPTORS,
                 useClass : ApiTokenInterceptorService,

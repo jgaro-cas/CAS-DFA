@@ -1,11 +1,12 @@
 <h1>Liste des utilisateurs</h1>
 
 <mat-card>
-    <mat-card-header>
+    <mat-card-header style="background-color: black; color: white;">
         <mat-card-title>Liste des utilisateurs</mat-card-title>
     </mat-card-header>  
     <mat-card-content *ngFor="let user of userList">
-        <strong>{{ user }}</strong>
+        <fa-icon [icon]="faUser"></fa-icon>
+        <span>{{ getUserPresentation(user) }}</span>
     </mat-card-content>
     <mat-card-footer>
         <mat-paginator></mat-paginator>

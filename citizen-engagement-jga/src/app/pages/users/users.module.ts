@@ -8,7 +8,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatPaginatorModule } from "@angular/material/paginator";
 import { MatCardModule } from "@angular/material/card";
-
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 @NgModule({
   declarations: [UsersListComponent],
@@ -20,7 +20,8 @@ import { MatCardModule } from "@angular/material/card";
     MatInputModule,
     MatCheckboxModule,
     MatPaginatorModule,
-    MatCardModule
+    MatCardModule,
+    FontAwesomeModule
   ]
 })
 export class UsersModule { }
