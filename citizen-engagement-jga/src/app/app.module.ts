@@ -23,7 +23,6 @@ import { DummyPageComponent } from './dummy-page/dummy-page.component';
 import { PageAccueilComponent } from './pages/page-accueil/page-accueil.component';
 import {} from './pages/me-page/me-page.module';
 import {} from './pages/users/users.module';
-import { from } from 'rxjs';
 
 @NgModule({
   declarations: [

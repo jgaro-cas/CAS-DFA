@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { UsersManagementService } from 'src/app/api/services/users-management.service';
 import { PaginationStructure } from 'src/app/models/pagination-structure';
 import { User } from 'src/app/models/user';
@@ -12,28 +13,32 @@ import { User } from 'src/app/models/user';
 export class UsersListComponent implements OnInit {
 
   userList : User[];
-  public pagination = new PaginationStructure;
+  public paginationLocale = new PaginationStructure;
 
-
+  @ViewChild(MatPaginator) paginator : MatPaginator;
 
   constructor(private userManagementService : UsersManagementService) { }
 
   ngOnInit(): void {
-      this.pagination.page = 1;
-      this.pagination.pageSize = 2;
-//    this.paginator.color = "accent";
-//    this.paginator.pageSize = 20;
-//    this.paginator.pageSizeOptions = [2, 5, 10, 20, 50];
-//    this.paginator.page.subscribe({
-//      next : () => {this.pagination.page = this.paginator.pageIndex;
-//                    this.pagination.pageSize = this.paginator.pageSize;
-//                    this.loadUserListWithPagination(this.pagination);
-//      }
-//    })
+      this.paginationLocale.page = 1;
+      this.paginationLocale.pageSize = 2;
+  }
+
+  ngAfterViewInit(){
+    this.paginator.color = "accent";
+    this.paginator.length = 5;
+    this.paginator.pageSize = 2;
+    this.paginator.pageSizeOptions = [2, 5, 10, 20, 50];
+    this.paginator.page.subscribe({
+      next : () => {this.paginationLocale.page = this.paginator.pageIndex + 1;
+                    this.paginationLocale.pageSize = this.paginator.pageSize;
+                    this.loadUserListWithPagination(this.paginationLocale);
+      }
+    })
   }
 
   loadUserListWithPagination(pagination : PaginationStructure){
-    this.userManagementService.loadAllUsers(this.pagination).subscribe({
+    this.userManagementService.loadAllUsers(pagination).subscribe({
       next: (result) => console.log(result),
       error: (error) => console.log(error)
     }) 
