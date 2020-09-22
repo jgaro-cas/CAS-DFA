@@ -38,9 +38,12 @@ export class UsersListComponent implements OnInit {
   }
 
   loadUserListWithPagination(pagination : PaginationStructure){
-    this.userManagementService.loadAllUsers(pagination).subscribe(
-      result => {const keys = result.headers.keys();
-                        console.log(result);
-                        console.log(keys);}) 
+    this.userManagementService.loadAllUsers(pagination).subscribe({
+      next : (result) => {this.paginator.length = parseInt(result.headers.get("pagination-total"));
+                          this.userList = result.body;
+                        },
+      error : (error) => console.log(error)
+    });
+  
   }
 }
