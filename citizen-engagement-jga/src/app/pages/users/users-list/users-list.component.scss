@@ -11,3 +11,46 @@
   color: coral;
 }
 
+.addUserIcon{
+  color: #eeeeee;
+}
+
+.cardTitle{
+  width: 70%;
+}
+
+.cardDescription{
+  font-size: 0.8em;
+  width: 30%;
+}
+
+.cardDescriptionLegend{
+  margin: 0;
+}
+
+#title{
+  margin: 12px 0;
+}
+
+fa-icon{
+  margin-right: 5px;
+}
+
+#userName{
+  margin-right: 3px;
+}
+
+#addUser{
+  background-color: green;
+}
+.cardFooter{
+  display: flex;
+  justify-content: space-between;
+}
+.footerLeft{
+  padding-left: 16px;
+}
+
+.footerRight{
+  width: 380px;
+}

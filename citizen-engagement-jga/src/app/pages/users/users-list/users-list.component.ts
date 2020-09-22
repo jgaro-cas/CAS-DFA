@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { UsersManagementService } from 'src/app/api/services/users-management.service';
 import { PaginationStructure } from 'src/app/models/pagination-structure';
 import { User } from 'src/app/models/user';
-import { faUser,faUserEdit, faPhoneAlt } from "@fortawesome/free-solid-svg-icons";
+import { faUser,faUserEdit, faPhoneAlt, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 
 
 
@@ -17,6 +17,7 @@ export class UsersListComponent implements OnInit {
   faUser = faUser;
   faUserEdit = faUserEdit;
   faPhoneAlt = faPhoneAlt;
+  faUserPlus = faUserPlus;
 
   userList : User[];
   public paginationLocale = new PaginationStructure;
@@ -33,7 +34,7 @@ export class UsersListComponent implements OnInit {
   ngAfterViewInit(){
     this.paginator.color = "accent";
     this.paginator.length = 5;
-    this.paginator.pageSize = 2;
+    this.paginator.pageSize = 5;
     this.paginator.pageSizeOptions = [2, 5, 10, 20, 50];
     this.paginator.page.subscribe({
       next : () => {this.paginationLocale.page = this.paginator.pageIndex + 1;
@@ -66,5 +67,17 @@ export class UsersListComponent implements OnInit {
     iconClass += user.roles.indexOf("citizen") > -1 ? "citizenIcon " : "";
     iconClass += user.roles.indexOf("staff") > -1 ? "staffIcon " : "";
     return iconClass;
+  }
+
+  getUserName(user : User){
+    return ` (${user.name})`;
+  }
+
+  jumpToUserEdition(user: User){
+    ;
+  }
+
+  jumpToUserCreation(){
+    ;
   }
 }

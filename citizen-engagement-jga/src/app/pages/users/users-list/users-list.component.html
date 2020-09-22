@@ -1,24 +1,42 @@
-<h1>Liste des utilisateurs</h1>
-
-<mat-card class="card">
- 
+<mat-accordion>
+  <mat-card class="card">
+    <mat-card-header>
+      <div class="cardTitle">
+        <mat-card-title id="title">Liste des utilisateurs</mat-card-title>
+      </div>
+      <div class="cardDescription">
+        <p class="cardDescriptionLegend">
+          <fa-icon class="citizenIcon" [icon]=faUser></fa-icon>
+          <span>Citoyen</span>
+        </p>
+        <p class="cardDescriptionLegend">
+          <fa-icon class="staffIcon" [icon]=faUser></fa-icon>
+          <span>Staff</span>
+        </p>
+      </div>
+    </mat-card-header>
     <mat-card-content *ngFor="let user of userList">
-        <mat-expansion-panel>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    <fa-icon [ngClass]="getClassIcon(user)" [icon]="faUser"></fa-icon>
-                    <span>{{ getUserPresentation(user) }}</span>
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <P><fa-icon [icon]="faPhoneAlt"></fa-icon> {{ getUserPhone(user) }}</P>
-            <mat-action-row>
-                <button mat-raised-button><fa-icon [icon]="faUserEdit"></fa-icon></button>
-            </mat-action-row>
-        </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <fa-icon [ngClass]="getClassIcon(user)" [icon]="faUser"></fa-icon>
+            <span id="userName">{{ getUserPresentation(user) }}</span><em>{{ getUserName(user) }}</em>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p><fa-icon [icon]="faPhoneAlt"></fa-icon>{{ getUserPhone(user) }}</p>
+        <mat-action-row>
+          <button mat-raised-button><fa-icon [icon]="faUserEdit"></fa-icon></button>
+        </mat-action-row>
+      </mat-expansion-panel>
     </mat-card-content>
-    <mat-card-footer>
+    <mat-card-footer class="cardFooter">
+      <div class="footerLeft">
+        <button id="addUser" mat-raised-button><fa-icon class="addUserIcon" [icon]="faUserPlus"></fa-icon></button>
+      </div>
+      <div class="footerRight">
         <mat-paginator></mat-paginator>
+      </div>
     </mat-card-footer>
-</mat-card>
-
+  </mat-card>
+</mat-accordion>
 
