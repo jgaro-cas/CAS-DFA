@@ -7,6 +7,7 @@ import { FormsModule} from '@angular/forms';
 import { MatInputModule } from "@angular/material/input";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatPaginatorModule } from "@angular/material/paginator";
+import { MatCardModule } from "@angular/material/card";
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { MatPaginatorModule } from "@angular/material/paginator";
     MatFormFieldModule,
     MatInputModule,
     MatCheckboxModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatCardModule
   ]
 })
 export class UsersModule { }

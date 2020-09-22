@@ -1,5 +1,15 @@
 <h1>Liste des utilisateurs</h1>
 
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>Liste des utilisateurs</mat-card-title>
+    </mat-card-header>  
+    <mat-card-content *ngFor="let user of userList">
+        <strong>{{ user }}</strong>
+    </mat-card-content>
+    <mat-card-footer>
+        <mat-paginator></mat-paginator>
+    </mat-card-footer>
+</mat-card>
 
-<mat-paginator>
-</mat-paginator>
+
