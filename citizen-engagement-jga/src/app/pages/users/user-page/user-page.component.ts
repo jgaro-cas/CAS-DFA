@@ -15,11 +15,15 @@ export class UserPageComponent implements OnInit {
 
   ngOnInit(): void { 
     console.log(history.state);
-    this.receivedUser = history.state;
+    this.receivedUser = history.state['user'];
+    console.log('User : ', this.receivedUser);
    }
 
   displayUser(){
     console.log("User :", this.receivedUser);
   }
 
+  getUserFirstLastName(){
+    return `${this.receivedUser.firstname} ${this.receivedUser.lastname}`;
+  }
 }

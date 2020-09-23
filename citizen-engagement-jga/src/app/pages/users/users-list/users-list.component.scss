@@ -15,8 +15,8 @@
   color: #eeeeee;
 }
 
-.cardTitle{
-  width: 70%;
+.mat-card-header{
+  justify-content: space-between;
 }
 
 .cardDescription{
@@ -26,6 +26,10 @@
 
 .cardDescriptionLegend{
   margin: 0;
+}
+
+.mat-card-header-text{
+  width: 70%;
 }
 
 #title{
