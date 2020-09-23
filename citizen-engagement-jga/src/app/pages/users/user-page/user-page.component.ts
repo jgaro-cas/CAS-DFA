@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 
@@ -25,5 +26,10 @@ export class UserPageComponent implements OnInit {
 
   getUserFirstLastName(){
     return `${this.receivedUser.firstname} ${this.receivedUser.lastname}`;
+  }
+
+
+  onSubmit(datas : NgForm){
+    ;
   }
 }
