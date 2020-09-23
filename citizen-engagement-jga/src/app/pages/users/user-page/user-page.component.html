@@ -7,9 +7,33 @@
       <form #userForm="ngForm" (submit)="onSubmit(userForm)">
         <mat-form-field apparence="outline" hintLabel="Max 25 characters">
           <mat-label>Nom d'utilisateur</mat-label>
-          <input matInput #input placeholder="Utilisateur" type="text" maxlength="25" [(ngModel)]="receivedUser.name" name="name" required>
+          <input matInput #input placeholder="Utilisateur" type="text" maxlength="25" [(ngModel)]="receivedUser.name" name="name" required [disabled]="!editMode">
           <mat-hint align="end">{{ input.value.length || 0 }} /25</mat-hint>
-        </mat-form-field>      
+        </mat-form-field>
+
+        <mat-form-field apparence="outline" hintLabel="Max 25 characters">
+          <mat-label>Prénom</mat-label>
+          <input matInput #inputFName placeholder="Prénom" type="text" maxlength="25" minlength="2" [(ngModel)]="receivedUser.firstname" name="firstName" required [disabled]="!editMode">
+          <mat-hint align="end">{{ inputFName.value.length || 0 }} /25</mat-hint>
+        </mat-form-field>
+      
+        <mat-form-field apparence="outline" hintLabel="Max 25 characters">
+          <mat-label>Nom de famille</mat-label>
+          <input matInput #inputLName placeholder="Nom de famille" type="text" maxlength="25" minlength="2" [(ngModel)]="receivedUser.lastname" name="lastName" required [disabled]="!editMode">
+          <mat-hint align="end">{{ inputLName.value.length || 0 }} /25</mat-hint>
+        </mat-form-field>
+      
+        <mat-form-field apparence="outline" hintLabel="Format +XX">
+          <mat-label>Téléphone</mat-label>
+          <input matInput #inputPhone placeholder="+41 XX XXX XX XX" type="tel" maxlength="16" minlength="16" [(ngModel)]="receivedUser.phone" name="phone" [disabled]="!editMode">
+          <mat-hint align="end">{{ inputPhone.value.length || 0 }} /25</mat-hint>
+        </mat-form-field>
+      
+        <button mat-raised-button [color]="editButtonColor" (click)="setEditMode()">{{editButtonText}}</button>
+        <button mat-raised-button style="background-color: green; color: white;" *ngIf="editMode">test</button>
+      
+
+
       </form>
   </mat-card-content>
 </mat-card>

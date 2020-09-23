@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user';
+import { faPen } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-user-page',
@@ -10,7 +11,11 @@ import { User } from 'src/app/models/user';
 })
 export class UserPageComponent implements OnInit {
 
-  receivedUser : User
+  receivedUser : User;
+  faPen = faPen;
+  editMode : boolean = false;
+  editButtonText : string = "Modifier";
+  editButtonColor : string = "primary";
 
   constructor() { }
 
@@ -32,4 +37,11 @@ export class UserPageComponent implements OnInit {
   onSubmit(datas : NgForm){
     ;
   }
+
+  setEditMode(){
+    this.editMode = !this.editMode;
+    this.editMode ? this.editButtonText = "Annuler" : this.editButtonText = "Modifier";
+    this.editMode ? this.editButtonColor = "warn" : this.editButtonColor = "primary";
+  }
+
 }
