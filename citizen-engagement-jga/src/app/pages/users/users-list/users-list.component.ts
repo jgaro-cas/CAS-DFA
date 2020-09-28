@@ -22,7 +22,7 @@ export class UsersListComponent implements OnInit {
 
   userList : User[];
   public paginationLocale = new PaginationStructure;
-
+x
   @ViewChild(MatPaginator) paginator : MatPaginator;
 
   constructor(private userManagementService : UsersManagementService, private router: Router) { }
@@ -31,18 +31,18 @@ export class UsersListComponent implements OnInit {
       this.paginationLocale.page = 1;
       this.paginationLocale.pageSize = 5;
       this.userManagementService.loadAllUsers(this.paginationLocale).subscribe({
-        next : (result) => this.userList = result.body
+        next : (result) => {this.userList = result.body;
+                            this.paginationLocale.length = parseInt(result.headers.get("pagination-total"));
+                            }
       })
   }
 
   ngAfterViewInit(){
     this.paginator.color = "accent";
-//    this.paginator.length = 5;
-//    this.paginator.pageSize = 5;
-//    this.paginator.pageSizeOptions = [2, 5, 10, 20, 50];
     this.paginator.page.subscribe({
       next : () => {this.paginationLocale.page = this.paginator.pageIndex + 1;
                     this.paginationLocale.pageSize = this.paginator.pageSize;
+
                     this.loadUserListWithPagination(this.paginationLocale);
       }
     })

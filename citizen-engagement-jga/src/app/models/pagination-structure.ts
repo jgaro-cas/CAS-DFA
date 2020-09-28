@@ -13,6 +13,7 @@ export type SortAction = "createdAt" | "-createdAt" |
 export class PaginationStructure {
   page : number;
   pageSize : number;
+  length : number;
   sortUser? : SortUser;
   sortIssue? : SortIssue;
   sortActions? : SortAction;

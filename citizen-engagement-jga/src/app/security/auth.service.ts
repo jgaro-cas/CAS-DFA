@@ -45,6 +45,12 @@ export class AuthService {
       map((auth) => (auth ? auth.token : undefined)));
   }
 
+  getStaffStatus(): Observable<boolean>{
+    return this.authenticated$.pipe(
+      map((auth) => (auth.user.roles.indexOf("staff") > -1 ? true : false))
+    );
+  }
+
   login(authRequest: AuthRequest): Observable<User> {
     return this.http.post<AuthResponse>(`${environment.apiUrl}/auth`, authRequest).pipe(
       tap((response) => this.saveAuth(response)),

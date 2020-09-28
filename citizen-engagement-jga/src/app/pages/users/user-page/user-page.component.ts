@@ -19,10 +19,13 @@ export class UserPageComponent implements OnInit {
   roleCitizen : boolean = false;
   roleStaff : boolean = false;
 
+  // fields
+  inputFName;
   constructor() { }
 
   ngOnInit(): void { 
     this.receivedUser = history.state['user'];
+    console.log("User", this.receivedUser);
     
    }
 
@@ -36,7 +39,7 @@ export class UserPageComponent implements OnInit {
 
 
   onSubmit(datas : NgForm){
-    ;
+    console.log("Submitted", datas);
   }
 
   getRoleStaff(){
@@ -44,7 +47,7 @@ export class UserPageComponent implements OnInit {
   }
 
   getRoleCitizen(){
-    return this.receivedUser.roles.indexOf("staff") > -1 ? true : false;
+    return this.receivedUser.roles.indexOf("citizen") > -1 ? true : false;
   }
 
 
@@ -53,5 +56,7 @@ export class UserPageComponent implements OnInit {
     this.editMode ? this.editButtonText = "Annuler" : this.editButtonText = "Modifier";
     this.editMode ? this.editButtonColor = "warn" : this.editButtonColor = "primary";
   }
+
+
 
 }
