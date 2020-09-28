@@ -77,6 +77,14 @@ export class UsersListComponent implements OnInit {
     return ` (${user.name})`;
   }
 
+  getRoleStaff(user: User){
+    return user.roles.indexOf("staff") > -1 ? true : false;
+  }
+
+  getRoleCitizen(user: User){
+    return user.roles.indexOf("staff") > -1 ? true : false;
+  }
+
   jumpToUserEdition(user: User){
     this.router.navigate(["/Accueil/user-page"], {state: {id:1, user: user}});
   }
