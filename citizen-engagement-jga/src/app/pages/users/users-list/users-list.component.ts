@@ -29,14 +29,17 @@ export class UsersListComponent implements OnInit {
 
   ngOnInit(): void {
       this.paginationLocale.page = 1;
-      this.paginationLocale.pageSize = 2;
+      this.paginationLocale.pageSize = 5;
+      this.userManagementService.loadAllUsers(this.paginationLocale).subscribe({
+        next : (result) => this.userList = result.body
+      })
   }
 
   ngAfterViewInit(){
     this.paginator.color = "accent";
-    this.paginator.length = 5;
-    this.paginator.pageSize = 5;
-    this.paginator.pageSizeOptions = [2, 5, 10, 20, 50];
+//    this.paginator.length = 5;
+//    this.paginator.pageSize = 5;
+//    this.paginator.pageSizeOptions = [2, 5, 10, 20, 50];
     this.paginator.page.subscribe({
       next : () => {this.paginationLocale.page = this.paginator.pageIndex + 1;
                     this.paginationLocale.pageSize = this.paginator.pageSize;

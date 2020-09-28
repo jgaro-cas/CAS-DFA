@@ -34,7 +34,9 @@
         <button id="addUser" mat-raised-button><fa-icon class="addUserIcon" [icon]="faUserPlus"></fa-icon></button>
       </div>
       <div class="footerRight">
-        <mat-paginator></mat-paginator>
+        <mat-paginator  
+                        [pageSize]="paginationLocale.pageSize"
+                        [pageSizeOptions]="[2, 5, 10, 20, 50]"></mat-paginator>
       </div>
     </mat-card-footer>
   </mat-card>
