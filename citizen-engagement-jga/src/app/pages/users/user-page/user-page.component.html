@@ -35,8 +35,12 @@
           <mat-checkbox [disabled]="!editMode || !getRoleStaff()" [checked]="getRoleStaff()">Administrateur</mat-checkbox>
         </section>
 
+        <div *ngIf="input.valid">1</div>
+
+
+
         <button mat-raised-button [color]="editButtonColor" (click)="setEditMode()" type="button">{{editButtonText}}</button>
-        <button mat-raised-button style="background-color: green; color: white;" *ngIf="editMode" disable="!userForm.form.valid" type="submit">Save</button>
+        <button mat-raised-button style="background-color: green; color: white;" *ngIf="editMode" [disabled]="!userForm.valid" type="submit">Save</button>
     
       </form>
   </mat-card-content>
