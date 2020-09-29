@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { UsersManagementService } from 'src/app/api/services/users-management.service';
 
 @Component({
   selector: 'app-user-page',
@@ -11,7 +12,8 @@ import { faPen } from "@fortawesome/free-solid-svg-icons";
 })
 export class UserPageComponent implements OnInit {
 
-  receivedUser : User;
+  user = new User;
+  receivedId : string;
   faPen = faPen;
   editMode : boolean = false;
   editButtonText : string = "Modifier";
@@ -21,33 +23,45 @@ export class UserPageComponent implements OnInit {
 
   // fields
   inputFName;
-  constructor() { }
 
-  ngOnInit(): void { 
-    this.receivedUser = history.state['user'];
-    console.log("User", this.receivedUser);
-    
+  constructor(private userManagement : UsersManagementService, private route : ActivatedRoute, private router : Router) {
+      this.route.paramMap.subscribe(
+        param => this.receivedId = param.get('id'));
+      
+      // Temporary for checkBox initialisation
+      this.user.roles=["citizen"];
+   }
+
+  ngOnInit(): void {
+    this.userManagement.loadSingleUser(this.receivedId).subscribe({
+      next : (result) => this.user = result,
+      error : (error) => {console.log("Error", error);
+                          this.router.navigate(['/Accueil/users']);}
+    })
    }
 
   displayUser(){
-    console.log("User :", this.receivedUser);
+    console.log("User :", this.user);
   }
 
   getUserFirstLastName(){
-    return `${this.receivedUser.firstname} ${this.receivedUser.lastname}`;
+    return `${this.user.firstname} ${this.user.lastname}`;
   }
-
 
   onSubmit(datas : NgForm){
     console.log("Submitted", datas);
   }
 
   getRoleStaff(){
-    return this.receivedUser.roles.indexOf("staff") > -1 ? true : false;
+    if (this.user.roles !== undefined) {
+      return this.user.roles.indexOf("staff") > -1 ? true : false;
+    } else {
+      return false;
+    }
   }
 
   getRoleCitizen(){
-    return this.receivedUser.roles.indexOf("citizen") > -1 ? true : false;
+    return this.user.roles.indexOf("citizen") > -1 ? true : false;
   }
 
 

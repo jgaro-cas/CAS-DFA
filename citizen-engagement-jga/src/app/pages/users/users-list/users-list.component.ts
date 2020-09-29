@@ -86,7 +86,7 @@ x
   }
 
   jumpToUserEdition(user: User){
-    this.router.navigate(["/Accueil/user-page"], {state: {id:1, user: user}});
+    this.router.navigate([`/Accueil/users/${user.id}`]);
   }
 
   jumpToUserCreation(){
