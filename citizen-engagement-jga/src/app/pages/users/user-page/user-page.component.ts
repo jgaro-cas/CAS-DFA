@@ -34,7 +34,8 @@ export class UserPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.userManagement.loadSingleUser(this.receivedId).subscribe({
-      next : (result) => this.user = result,
+      next : (result) => {this.user = result;
+                          this.user.password = undefined;},
       error : (error) => this.router.navigate(['/Accueil/users'])
     })
    }
@@ -48,7 +49,12 @@ export class UserPageComponent implements OnInit {
   }
 
   onSubmit(datas : NgForm){
-    console.log("Submitted", datas);
+    Object.assign(this.user, datas.value);
+    console.log(this.user);
+    this.userManagement.updateUser(this.user.id, this.user).subscribe({
+      next: (result) => this.router.navigate(['/Accueil/users']),
+      error : (error) => console.log("Error", error)
+    });
   }
 
   getRoleStaff(){

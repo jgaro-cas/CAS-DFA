@@ -4,12 +4,16 @@
       <mat-card-title id="title">Liste des utilisateurs</mat-card-title>
       <div id="sortSelect">
         <mat-label>Tri :</mat-label>
-        <mat-select id="selector" (selectionChange)="changeSelectValue($event.value)">
+        <mat-select id="selector" #selector (selectionChange)="changeSelectValue($event.value)">
           <mat-option>--</mat-option>
-          <mat-option value="name">Utilisateur</mat-option>
-          <mat-option value="firstname">Prénom</mat-option>
-          <mat-option value="lastname">Nom</mat-option>
-          <mat-option value="phone">Téléphione</mat-option>
+          <mat-option value="name">Utilisateur <fa-icon [icon]="faAngleUp"></fa-icon></mat-option>
+          <mat-option value="-name">Utilisateur <fa-icon [icon]="faAngleDown"></fa-icon></mat-option>
+          <mat-option value="firstname">Prénom <fa-icon [icon]="faAngleUp"></fa-icon></mat-option>
+          <mat-option value="-firstname">Prénom <fa-icon [icon]="faAngleDown"></fa-icon></mat-option>
+          <mat-option value="lastname">Nom <fa-icon [icon]="faAngleUp"></fa-icon></mat-option>
+          <mat-option value="-lastname">Nom <fa-icon [icon]="faAngleDown"></fa-icon></mat-option>
+          <mat-option value="phone">Téléphone <fa-icon [icon]="faAngleUp"></fa-icon></mat-option>
+          <mat-option value="-phone">Téléphone <fa-icon [icon]="faAngleDown"></fa-icon></mat-option>
         </mat-select>  
       </div>
       <div class="cardDescription">

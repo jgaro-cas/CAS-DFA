@@ -7,19 +7,19 @@
       <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
         <mat-form-field apparence="outline" hintLabel="Max 25 characters">
           <mat-label>Nom d'utilisateur</mat-label>
-          <input matInput #input placeholder="Utilisateur" type="text" maxlength="25" [(ngModel)]="user.name" name="name" required [disabled]="!editMode">
+          <input matInput #input placeholder="Utilisateur" type="text" pattern="[a-zA-Z0-9]+" maxlength="25" [(ngModel)]="user.name" name="name" required [disabled]="!editMode">
           <mat-hint align="end">{{ input.value.length || 0 }} /25</mat-hint>
         </mat-form-field>
 
         <mat-form-field apparence="outline" hintLabel="Max 25 characters">
           <mat-label>Prénom</mat-label>
-          <input matInput #inputFName placeholder="Prénom" type="text" maxlength="25" minlength="2" [(ngModel)]="user.firstname" name="firstName" required [disabled]="!editMode">
+          <input matInput #inputFName placeholder="Prénom" type="text" maxlength="25" minlength="2" [(ngModel)]="user.firstname" name="firstname" required [disabled]="!editMode">
           <mat-hint align="end">{{ inputFName.value.length || 0 }} /25</mat-hint>
         </mat-form-field>
       
         <mat-form-field apparence="outline" hintLabel="Max 25 characters">
           <mat-label>Nom de famille</mat-label>
-          <input matInput #inputLName placeholder="Nom de famille" type="text" maxlength="25" minlength="2" [(ngModel)]="user.lastname" name="lastName" required [disabled]="!editMode">
+          <input matInput #inputLName placeholder="Nom de famille" type="text" maxlength="25" minlength="2" [(ngModel)]="user.lastname" name="lastname" required [disabled]="!editMode">
           <mat-hint align="end">{{ inputLName.value.length || 0 }} /25</mat-hint>
         </mat-form-field>
       

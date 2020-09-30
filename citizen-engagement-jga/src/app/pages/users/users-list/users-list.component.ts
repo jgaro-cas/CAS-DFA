@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { UsersManagementService } from 'src/app/api/services/users-management.service';
 import { PaginationStructure, SortUser } from 'src/app/models/pagination-structure';
 import { User } from 'src/app/models/user';
-import { faUser,faUserEdit, faPhoneAlt, faUserPlus } from "@fortawesome/free-solid-svg-icons";
+import { faUser,faUserEdit, faPhoneAlt, faUserPlus, faAngleUp, faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { Router } from '@angular/router';
 
 
@@ -19,8 +19,12 @@ export class UsersListComponent implements OnInit {
   faUserEdit = faUserEdit;
   faPhoneAlt = faPhoneAlt;
   faUserPlus = faUserPlus;
+  faAngleUp = faAngleUp;
+  faAngleDown = faAngleDown;
+  
 
   userList : User[];
+  sortAscending : boolean = true;
   public paginationLocale = new PaginationStructure;
 
   @ViewChild(MatPaginator) paginator : MatPaginator;
@@ -94,9 +98,10 @@ export class UsersListComponent implements OnInit {
   }
 
   changeSelectValue(sortCond : SortUser){
+    // impossible de générer un string de type sortUser à la volée pour 
+    // les option asc/desc par boutton... 
+    // Du coup entrée manuelle des version avec ou sans " - "
     this.paginationLocale.sortUser = sortCond;
-
-    this.loadUserListWithPagination(this.paginationLocale);
-
+    this.loadUserListWithPagination(this.paginationLocale);    
   }
 }
