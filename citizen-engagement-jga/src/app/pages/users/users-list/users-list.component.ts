@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { UsersManagementService } from 'src/app/api/services/users-management.service';
-import { PaginationStructure } from 'src/app/models/pagination-structure';
+import { PaginationStructure, SortUser } from 'src/app/models/pagination-structure';
 import { User } from 'src/app/models/user';
 import { faUser,faUserEdit, faPhoneAlt, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { Router } from '@angular/router';
@@ -22,7 +22,7 @@ export class UsersListComponent implements OnInit {
 
   userList : User[];
   public paginationLocale = new PaginationStructure;
-x
+
   @ViewChild(MatPaginator) paginator : MatPaginator;
 
   constructor(private userManagementService : UsersManagementService, private router: Router) { }
@@ -91,5 +91,12 @@ x
 
   jumpToUserCreation(){
     ;
+  }
+
+  changeSelectValue(sortCond : SortUser){
+    this.paginationLocale.sortUser = sortCond;
+
+    this.loadUserListWithPagination(this.paginationLocale);
+
   }
 }

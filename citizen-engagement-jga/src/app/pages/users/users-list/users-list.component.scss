@@ -21,11 +21,12 @@
 
 .cardDescription{
   font-size: 0.8em;
-  width: 30%;
+  width: 70px;
 }
 
 .cardDescriptionLegend{
   margin: 0;
+  
 }
 
 .mat-card-header-text{
@@ -55,6 +56,17 @@ fa-icon{
   padding-left: 16px;
 }
 
+#sortSelect{
+  width: 150px;
+  display: flex;
+  align-items: center;
+}
+
+#selector{
+  width: 119px;
+  display: inline-block;
+  margin-left: 3px;
+}
 .footerRight{
   width: 380px;
 }

@@ -35,8 +35,7 @@ export class UserPageComponent implements OnInit {
   ngOnInit(): void {
     this.userManagement.loadSingleUser(this.receivedId).subscribe({
       next : (result) => this.user = result,
-      error : (error) => {console.log("Error", error);
-                          this.router.navigate(['/Accueil/users']);}
+      error : (error) => this.router.navigate(['/Accueil/users'])
     })
    }
 

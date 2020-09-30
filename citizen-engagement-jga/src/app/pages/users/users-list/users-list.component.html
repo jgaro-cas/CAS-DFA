@@ -1,9 +1,17 @@
 <mat-accordion>
   <mat-card class="card">
     <mat-card-header>
-      <!--<div class="cardTitle">-->
-        <mat-card-title id="title">Liste des utilisateurs</mat-card-title>
-      <!--</div>-->
+      <mat-card-title id="title">Liste des utilisateurs</mat-card-title>
+      <div id="sortSelect">
+        <mat-label>Tri :</mat-label>
+        <mat-select id="selector" (selectionChange)="changeSelectValue($event.value)">
+          <mat-option>--</mat-option>
+          <mat-option value="name">Utilisateur</mat-option>
+          <mat-option value="firstname">Prénom</mat-option>
+          <mat-option value="lastname">Nom</mat-option>
+          <mat-option value="phone">Téléphione</mat-option>
+        </mat-select>  
+      </div>
       <div class="cardDescription">
         <p class="cardDescriptionLegend">
           <fa-icon class="citizenIcon" [icon]=faUser></fa-icon>

@@ -11,6 +11,7 @@ import { MatCardModule } from "@angular/material/card";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { MatExpansionModule } from '@angular/material/expansion';
 import { UserPageComponent } from './user-page/user-page.component'; 
+import { MatSelectModule } from "@angular/material/select";
 
 @NgModule({
   declarations: [UsersListComponent, UserPageComponent],
@@ -24,7 +25,8 @@ import { UserPageComponent } from './user-page/user-page.component';
     MatPaginatorModule,
     MatCardModule,
     FontAwesomeModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSelectModule
   ]
 })
 export class UsersModule { }
