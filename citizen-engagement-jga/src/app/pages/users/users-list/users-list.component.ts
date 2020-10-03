@@ -94,7 +94,7 @@ export class UsersListComponent implements OnInit {
   }
 
   jumpToUserCreation(){
-    ;
+    this.router.navigate([`/Accueil/users/new`]);
   }
 
   changeSelectValue(sortCond : SortUser){

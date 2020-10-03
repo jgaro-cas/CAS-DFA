@@ -20,9 +20,10 @@ export class UserPageComponent implements OnInit {
   editButtonColor : string = "primary";
   roleCitizen : boolean = false;
   roleStaff : boolean = false;
+  newUserEdition : boolean = false;
 
-  // fields
-  inputFName;
+  checkCitizen : boolean;
+  checkStaff : boolean;
 
   constructor(private userManagement : UsersManagementService, private route : ActivatedRoute, private router : Router) {
       this.route.paramMap.subscribe(
@@ -33,28 +34,65 @@ export class UserPageComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.userManagement.loadSingleUser(this.receivedId).subscribe({
-      next : (result) => {this.user = result;
-                          this.user.password = undefined;},
-      error : (error) => this.router.navigate(['/Accueil/users'])
-    })
-   }
+    if (this.receivedId !== "new"){
+      this.userManagement.loadSingleUser(this.receivedId).subscribe({
+        next : (result) => {this.user = result;
+                            this.user.password = null;
+                            this.checkStaff = result.roles.indexOf("staff") > -1;
+                            this.checkCitizen = result.roles.indexOf("citizen") > -1;},
+        error : (error) => this.router.navigate(['/Accueil/users'])
+      })
+    } else {
+      this.newUserEdition = true;
+      this.editMode = true;
+    }
+  }
 
   displayUser(){
     console.log("User :", this.user);
   }
 
   getUserFirstLastName(){
-    return `${this.user.firstname} ${this.user.lastname}`;
+    return this.newUserEdition ? `${this.user.firstname} ${this.user.lastname}` : `Nouvel utilisateur`;
   }
 
   onSubmit(datas : NgForm){
     Object.assign(this.user, datas.value);
     console.log(this.user);
-    this.userManagement.updateUser(this.user.id, this.user).subscribe({
-      next: (result) => this.router.navigate(['/Accueil/users']),
-      error : (error) => console.log("Error", error)
-    });
+    if (this.newUserEdition === true){
+      if (this.checkCitizen === true){
+        this.user.roles.push("citizen");
+      } else {
+        this.user.roles.slice(this.user.roles.indexOf("citizen"));
+      }
+      if (this.checkStaff === true){
+        this.user.roles.push("staff");
+      } else {
+        this.user.roles.slice(this.user.roles.indexOf("staff"));
+      }
+      this.userManagement.createUser(this.user).subscribe({
+        next: () => this.router.navigate(['/Accueil/users']),
+        error : (error) => console.log("Error", error)
+      });
+    } else {
+      this.user.password = this.user.password === null ? undefined : this.user.password;
+      this.user.roles.splice(0, this.user.roles.length);
+      if (this.checkCitizen === true){
+        this.user.roles.push("citizen");
+      } else {
+        this.user.roles.slice(this.user.roles.indexOf("citizen"), this.user.roles.indexOf("citizen") + 1);
+      }
+      if (this.checkStaff === true){
+        this.user.roles.push("staff");
+      } else {
+        this.user.roles.slice(this.user.roles.indexOf("staff"));
+      }
+
+      this.userManagement.updateUser(this.user.id, this.user).subscribe({
+        next: () => this.router.navigate(['/Accueil/users']),
+        error : (error) => console.log("Error", error)
+      });
+    }
   }
 
   getRoleStaff(){

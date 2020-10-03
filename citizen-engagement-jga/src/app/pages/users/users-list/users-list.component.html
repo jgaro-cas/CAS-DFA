@@ -43,7 +43,7 @@
     </mat-card-content>
     <mat-card-footer class="cardFooter">
       <div class="footerLeft">
-        <button id="addUser" mat-raised-button><fa-icon class="addUserIcon" [icon]="faUserPlus"></fa-icon></button>
+        <button id="addUser" mat-raised-button (click)="jumpToUserCreation()"><fa-icon class="addUserIcon" [icon]="faUserPlus"></fa-icon></button>
       </div>
       <div class="footerRight">
         <mat-paginator  [length]="paginationLocale.length"
