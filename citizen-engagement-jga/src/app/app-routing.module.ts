@@ -7,6 +7,7 @@ import { PageAccueilComponent } from './pages/page-accueil/page-accueil.componen
 import { MePageComponent } from './pages/me-page/me-page.component';
 import { UsersListComponent } from "./pages/users/users-list/users-list.component";
 import { UserPageComponent } from './pages/users/user-page/user-page.component';
+import { IssuesListComponent } from "./pages/issues/issues-list/issues-list.component";
 import { User } from './models/user';
 
 const routes: Routes = [
@@ -19,7 +20,8 @@ const routes: Routes = [
       {path: "login", component: LoginPageComponent},
       {path: "me", component: MePageComponent, canActivate: [AuthGuard]},
       {path: "users", component: UsersListComponent, canActivate: [AuthGuard]},
-      {path: "users/:id",component: UserPageComponent, canActivate: [AuthGuard]}
+      {path: "users/:id",component: UserPageComponent, canActivate: [AuthGuard]},
+      {path: "issues", component: IssuesListComponent, canActivate: [AuthGuard]}
     ]}
 ];
 

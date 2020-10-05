@@ -24,12 +24,13 @@ import { DummyPageComponent } from './dummy-page/dummy-page.component';
 import { PageAccueilComponent } from './pages/page-accueil/page-accueil.component';
 import {} from './pages/me-page/me-page.module';
 import {} from './pages/users/users.module';
+import {} from './pages/issues/issues.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     DummyPageComponent,
-    PageAccueilComponent,
+    PageAccueilComponent
   ],
   imports: [
     BrowserModule,
