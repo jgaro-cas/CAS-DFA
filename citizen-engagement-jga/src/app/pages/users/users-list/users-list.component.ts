@@ -37,8 +37,9 @@ export class UsersListComponent implements OnInit {
       this.userManagementService.loadAllUsers(this.paginationLocale).subscribe({
         next : (result) => {this.userList = result.body;
                             this.paginationLocale.length = parseInt(result.headers.get("pagination-total"));
-                            }
-      })
+                            },
+        error : (error)=> console.log("Erreur", error)
+        })
   }
 
   ngAfterViewInit(){

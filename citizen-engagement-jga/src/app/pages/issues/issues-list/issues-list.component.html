@@ -4,6 +4,37 @@
       <mat-card-header>
         <mat-card-title id="title">Liste des dérangements</mat-card-title>
       </mat-card-header>
+      <mat-card-content *ngFor="let issue of issueList">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <mat-chip-list>
+                <mat-chip *ngIf="issue.state=='new'" color="primary" selected> Nouveau </mat-chip>
+                <mat-chip *ngIf="issue.state=='inProgress'" color="accent" selected> En cours </mat-chip>
+                <mat-chip *ngIf="issue.state=='rejected'" color="warn" selected> Rejeté </mat-chip>
+                <mat-chip *ngIf="issue.state=='resolved'" class="chipGreen"> Terminé </mat-chip>
+              </mat-chip-list>
+              <p class="issueTitle"><strong>{{ issue.description.slice(0,25) + " ..." }}</strong></p>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>Dérengement créé le {{ issue.createdAt.toString().split("T")[0] }}</p>
+          <img [src]="issue.imageUrl" style="background-color: blue;" height="120px" width="auto">
+          <p> {{ issue.description }}</p>
+          <mat-action-row>
+            <button mat-raised-button (click)="jumpToIssueEdition(issue)"><fa-icon [icon]="faSearch"></fa-icon></button>
+          </mat-action-row>
+        </mat-expansion-panel>
+      </mat-card-content>
+      <mat-card-footer class="cardFooter">
+        <div class="footerLeft">
+          <button id="addIssue" mat-raised-button (click)="jumpToIssueCreation()"></button>
+        </div>
+        <div class="footerRight">
+          <mat-paginator  [length]="issueRequestParam.pagination.length"
+                          [pageSize]="issueRequestParam.pagination.pageSize"
+                          [pageSizeOptions]="[2, 5, 10, 20, 50]"></mat-paginator>
+        </div>
+      </mat-card-footer>  
     </mat-card>
   </mat-accordion>
   <mat-card class="card" id="cardDisplay">

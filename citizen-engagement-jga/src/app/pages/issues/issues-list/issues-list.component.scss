@@ -16,3 +16,21 @@ mat-accordion {
   display: flex;
   justify-content: space-between;
 }
+
+mat-chip{
+  font-size: 0.8em;
+}
+
+.mat-chip-list{
+  margin: 4px;
+  margin-right: 8px!important;
+}
+
+.chipGreen {
+  background-color: green;
+  color: white;
+}
+
+.issueTitle{
+  margin-top: 10px;
+}
