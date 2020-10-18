@@ -3,6 +3,9 @@ import { AuthRequest } from "src/app/models/auth-request";
 import { AuthService } from "../auth.service";
 import { Router } from "@angular/router";
 import { NgForm } from "@angular/forms";
+import { User } from 'src/app/models/user';
+import { UsersManagementService } from 'src/app/api/services/users-management.service';
+import { ConstantPool } from '@angular/compiler';
 
 @Component({
   selector: "app-login-page",
@@ -21,8 +24,10 @@ export class LoginPageComponent {
    * (probably because the name or password is incorrect).
    */
   loginError: boolean;
+  signInMode: boolean = false;
+  newUser = new User;
 
-  constructor(private auth: AuthService, private router: Router) {
+  constructor(private auth: AuthService, private router: Router, private userService : UsersManagementService) {
     this.authRequest = new AuthRequest();
     this.loginError = false;
   }
@@ -38,7 +43,7 @@ export class LoginPageComponent {
 
       // Perform the authentication request to the API.
       this.auth.login(this.authRequest).subscribe({
-        next: (result) => {this.router.navigateByUrl("/");
+        next: (result) => {this.router.navigateByUrl("/Accueil");
                             console.log(result);
                           },
         error: (err) => {
@@ -48,4 +53,29 @@ export class LoginPageComponent {
       });
     }
   }
+
+  changeSignInMode(){
+    this.signInMode = !this.signInMode;
+    if(this.signInMode){
+      this.authRequest.name = "";
+      this.authRequest.password = "";
+    } else{
+      this.newUser.name = "";
+      this.newUser.firstname = "";
+      this.newUser.lastname = "";
+      this.newUser.password = "";
+      this.newUser.phone = "";
+    }
+  }
+
+  onSigninSubmit(form: NgForm){
+    if(form.valid){
+      this.newUser.roles = ["citizen"];
+      this.userService.createUser(this.newUser).subscribe({
+        next: () => this.changeSignInMode(),
+        error: (error) => console.log("Erreur", error)
+      });
+    }
+  }
+
 }

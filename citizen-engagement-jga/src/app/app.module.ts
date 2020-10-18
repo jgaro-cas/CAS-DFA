@@ -20,6 +20,7 @@ import { MatSelectModule } from "@angular/material/select";
 import { MatCheckboxModule } from "@angular/material/checkbox";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatButtonModule } from "@angular/material/button";
 
 // Pages
 import { DummyPageComponent } from './dummy-page/dummy-page.component';
@@ -49,7 +50,8 @@ import {} from './pages/issues/issues.module';
     MatCheckboxModule,
     MatFormFieldModule,
     MatPaginatorModule,
-    LeafletModule
+    LeafletModule,
+    MatButtonModule
   ],
   providers: [{provide : HTTP_INTERCEPTORS,
                 useClass : ApiTokenInterceptorService,

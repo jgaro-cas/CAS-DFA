@@ -10,15 +10,17 @@ import { UserPageComponent } from './pages/users/user-page/user-page.component';
 import { IssuesListComponent } from "./pages/issues/issues-list/issues-list.component";
 import { User } from './models/user';
 import { IssuePageComponent } from './pages/issues/issue-page/issue-page.component';
+import { SignInPageComponent } from './security/sign-in-page/sign-in-page.component';
 
 const routes: Routes = [
-  {path: "", redirectTo: "Accueil", pathMatch: "full"},
-  {path: "login", redirectTo: "Accueil/login", pathMatch: "full"},
+  {path: "", redirectTo: "login", pathMatch: "full"},
+  //{path: "login", redirectTo: "Accueil/login", pathMatch: "full"},
+  {path: "login", component: LoginPageComponent},
   {path: "Accueil", 
     component: PageAccueilComponent,
     children: [
       {path: "", redirectTo: "me", pathMatch: "full"},
-      {path: "login", component: LoginPageComponent},
+      //{path: "login", component: LoginPageComponent},
       {path: "me", component: MePageComponent, canActivate: [AuthGuard]},
       {path: "users", component: UsersListComponent, canActivate: [AuthGuard]},
       {path: "users/:id",component: UserPageComponent, canActivate: [AuthGuard]},

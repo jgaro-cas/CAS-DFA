@@ -1,37 +1,55 @@
-<form #loginForm="ngForm" (submit)="onSubmit(loginForm)">
-  <div>
-    <label for="name">Name</label>
-    <input
-      type="text"
-      name="name"
-      id="name"
-      #nameField="ngModel"
-      required
-      [(ngModel)]="authRequest.name"
-    />
-    <p *ngIf="nameField.hasError('required') && nameField.touched">
-      Name is required
-    </p>
-  </div>
-  <div>
-    <label for="password">Password</label>
-    <input
-      type="password"
-      name="password"
-      id="passwrod"
-      #passwordField="ngModel"
-      required
-      [(ngModel)]="authRequest.password"
-    />
-    <p *ngIf="passwordField.hasError('required') && passwordField.touched">
-      Password is required
-    </p>
-  </div>
+<mat-card class="cardLogin" *ngIf="!signInMode">
+  <mat-card-header>
+    <mat-card-title>Bienvenue sur le site de Citizen Engagement</mat-card-title>
+    <mat-card-subtitle>Veuillez vous connecter ou vous inscrire</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form #loginForm="ngForm" (submit)="onSubmit(loginForm)">
+      <mat-form-field class="formInputs">
+        <mat-label>Nom</mat-label>
+        <input matInput #nameField="ngModel" placeholder="Nom" type="text" name="name" [(ngModel)]="authRequest.name" required>
+      </mat-form-field>
+      <mat-form-field class="formInputs">
+        <mat-label>Mot de passe</mat-label>
+        <input matInput type="password" name="password" id="passwrod" #passwordField="ngModel" required [(ngModel)]="authRequest.password" />
+      </mat-form-field>
 
-  <div>
-    <button type="submit" [disabled]="loginForm.invalid">Log in</button>
-    <p *ngIf="loginError">
-      Unable to log in. See the log for more information.
-    </p>
-  </div>
-</form>
+      <button mat-raised-button type="submit" [disabled]="loginForm.invalid">Se connecter</button>
+      <button mat-raised-button type="button" (click)="changeSignInMode()">S'enregistrer</button>
+    </form>
+  </mat-card-content>
+</mat-card>
+
+<mat-card class="cardSignIn" *ngIf="signInMode">
+  <mat-card-header>
+    <mat-card-title>Bienvenue sur le site de Citizen Engagement</mat-card-title>
+    <mat-card-subtitle>Veuillez indiquer les informations pour vous inscrire</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <form #signinForm="ngForm" (submit)="onSigninSubmit(signinForm)">
+      <mat-form-field class="formInputs">
+        <mat-label>Nom d'utilisateur</mat-label>
+        <input matInput #signinNameField="ngModel" placeholder="Nom" type="text" name="name" [(ngModel)]="newUser.name" required>
+      </mat-form-field>
+      <mat-form-field class="formInputs">
+        <mat-label>Prénom</mat-label>
+        <input matInput #signinFirstNameField="ngModel" placeholder="Nom" type="text" name="firstname" [(ngModel)]="newUser.firstname" required>
+      </mat-form-field>
+      <mat-form-field class="formInputs">
+        <mat-label>Nom</mat-label>
+        <input matInput #signinLastNameField="ngModel" placeholder="Nom" type="text" name="lastname" [(ngModel)]="newUser.lastname" required>
+      </mat-form-field>
+      <mat-form-field class="formInputs">
+        <mat-label>Téléphone</mat-label>
+        <input matInput #signinPhone="ngModel" placeholder="+41 XX XXX XX XX" type="tel" name="phone" [(ngModel)]="newUser.phone">
+      </mat-form-field>
+      <mat-form-field class="formInputs">
+        <mat-label>Mot de passe</mat-label>
+        <input matInput type="password" name="password" id="passwrod" #signinPasswordField="ngModel" required [(ngModel)]="newUser.password" />
+      </mat-form-field>
+
+      <button mat-raised-button type="submit" [disabled]="signinForm.invalid">S'enregistrer</button>
+      <button mat-raised-button type="button" (click)="changeSignInMode()">Se connecter</button>
+    </form>
+  </mat-card-content>
+</mat-card>
