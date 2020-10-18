@@ -35,7 +35,7 @@
       </section>
 
       <button mat-raised-button [color]="editButtonColor" (click)="setEditMode()">{{editButtonText}}</button>
-      <button mat-raised-button style="background-color: green; color: white;" *ngIf="editMode">test</button>
+      <button mat-raised-button style="background-color: green; color: white;" *ngIf="editMode" [disabled]="!meForm.valid" type="submit">Sauvegarder</button>
 
     </form>
   </mat-card-content>  
