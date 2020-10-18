@@ -9,6 +9,7 @@ import { IssueActionsRequest } from 'src/app/models/issue-actions-request';
 import { ActionStructure } from 'src/app/models/action-structure';
 import { CommentsRequest } from 'src/app/models/comments-request';
 import { CommentStructure } from 'src/app/models/comment-structure';
+import { IssueComment } from "src/app/models/issue-comment";
 
 @Injectable({
   providedIn: 'root'
@@ -104,7 +105,7 @@ export class IssueService {
     return this.http.post<ActionStructure>(`${environment.apiUrl}/issues/${id}/actions`, param);
   }
 
-  loadIssueComment(id : string, param : CommentsRequest) : Observable<string[]>{
+  loadIssueComment(id : string, param : CommentsRequest) : Observable<IssueComment[]>{
     let includeParam : string = "";
 
     if (param.include !== undefined && param.include.length > 0 && param.include[0].length > 0) {
@@ -116,7 +117,7 @@ export class IssueService {
       includeParam = "";
     }
 
-    return this.http.get<string[]>(`${environment.apiUrl}/issues/${id}/comments?${param.pagination.getSimpleRequest()}${includeParam}`)
+    return this.http.get<IssueComment[]>(`${environment.apiUrl}/issues/${id}/comments?${param.pagination.getSimpleRequest()}${includeParam}`)
   }
 
   createIssueComment(id : string, param : CommentStructure) : Observable<string>{

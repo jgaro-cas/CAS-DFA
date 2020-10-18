@@ -1,6 +1,6 @@
 import { Comment } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, NgModel } from '@angular/forms';
 import { ActivatedRoute, Router} from '@angular/router';
 import { IssueTypeService } from 'src/app/api/services/issue-type.service';
 import { IssueService } from 'src/app/api/services/issue.service';
@@ -11,6 +11,7 @@ import { Issue } from 'src/app/models/issue';
 import { IssueListRequestParam } from 'src/app/models/issue-list-request-param';
 import { IssueComment } from "src/app/models/issue-comment";
 import { PaginationStructure } from 'src/app/models/pagination-structure';
+import { CommentStructure } from 'src/app/models/comment-structure';
 
 @Component({
   selector: 'app-issue-page',
@@ -42,6 +43,7 @@ export class IssuePageComponent implements OnInit {
   commentButtonText: string = "Commenter";
   commentButtonColor: string = "primary";
   commentList: IssueComment[];
+  newComment = new CommentStructure;
 
   constructor(private issueService : IssueService, private route: ActivatedRoute, 
               private router: Router, private userManagement: UsersManagementService,
@@ -57,6 +59,8 @@ export class IssuePageComponent implements OnInit {
       this.issueRequestComplement.include = ["actions", "assignee", "creator", "issueType"];
       this.commentRequestComplement.include = ["author"];
       this.commentRequestComplement.pagination = new PaginationStructure;
+      this.commentRequestComplement.pagination.page = 1;
+      this.commentRequestComplement.pagination.pageSize = 50;
       this.loadIssue();
       this.loadComments();
     }
@@ -88,7 +92,8 @@ export class IssuePageComponent implements OnInit {
 
   loadComments(){
     this.issueService.loadIssueComment(this.receivedId, this.commentRequestComplement).subscribe({
-      next: (result) => this.addNewCommentToList(result),
+      next: (result) => {this.commentList = result;
+                          console.log("Commentlist", this.commentList);},
       error: (error) => console.log("Erreur", error)
     });
   }
@@ -145,8 +150,9 @@ export class IssuePageComponent implements OnInit {
 
   setCommentMode(){
     this.commentMode = !this.commentMode;
-    this.commentMode ? this.commentButtonText = "Annuler" : this.commentButtonText = "Modifier";
+    this.commentMode ? this.commentButtonText = "Annuler" : this.commentButtonText = "Commenter";
     this.commentMode ? this.commentButtonColor = "warn" : this.commentButtonColor = "primary";
+    this.newComment.text = "";
   }
 
   addTags(tags : string){
@@ -156,17 +162,22 @@ export class IssuePageComponent implements OnInit {
     });
   }
 
-  addNewCommentToList(comments : Object[]){
+  addNewCommentToList(comments : IssueComment[]){
     let commentTemp : IssueComment;
     console.log("Comment : ", comments);
     comments.forEach(comment => {
       commentTemp = comment;
     });
-    
-//    commentTemp.createdAt = comment.createdAt;
-//    commentTemp.id = comment.id;
-//    commentTemp.text = comment.text;
-    
+  }
+
+  onCommentSubmit(datas : NgForm){
+    console.log(datas);
+    console.log("Texte :", this.newComment);
+    this.issueService.createIssueComment(this.issue.id, this.newComment).subscribe({
+      next: () => {this.loadComments();
+                  this.setCommentMode();},
+      error: (error) => console.log("Erreur", error)
+    })
   }
 
 }

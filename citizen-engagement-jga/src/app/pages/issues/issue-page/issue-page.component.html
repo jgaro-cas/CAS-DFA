@@ -42,7 +42,7 @@
         <mat-hint align="end">{{ input.value.length || 0 }} /1000</mat-hint>
       </mat-form-field>
       <button mat-raised-button [color]="editButtonColor" (click)="setEditMode()" type="button" *ngIf="!newIssueEdition">{{editButtonText}}</button>
-      <button mat-raised-button style="background-color: green; color: white;" *ngIf="editMode" [disabled]="!issueForm.valid" type="submit">Save</button>
+      <button mat-raised-button style="background-color: green; color: white;" *ngIf="editMode" [disabled]="!issueForm.valid" type="submit">Sauvegarder</button>
 
     </form>
   <hr>
@@ -50,8 +50,25 @@
     <button mat-raised-button [color]="commentButtonColor" (click)="setCommentMode()" *ngIf="!newIssueEdition">{{commentButtonText}}</button>
   </mat-card-actions>
 
+  <mat-card class="newCommentCard" *ngIf="commentMode">
+    <form #commentForm="ngForm" (ngSubmit)="onCommentSubmit(commentForm)">
+      <mat-form-field class="commentArea" apparence="outline" hintLabel="Max 1000 characters" style="width: 90%; margin-bottom: 6px;">
+        <mat-label>Nouveau commentaire</mat-label>
+        <textarea matInput #input placeholder="Description" type="text" maxlength="1000" [(ngModel)]="newComment.text" name="text" required cols="120"></textarea>
+        <mat-hint align="end">{{ input.value.length || 0 }} /1000</mat-hint>
+      
+      </mat-form-field>
+      <button mat-raised-button style="background-color: green; color: white;" *ngIf="commentMode" [disabled]="!commentForm.valid" type="submit">Envoyer</button>
+    </form>
+  </mat-card>
+
   <mat-card-footer>
-    Commentaires
+  <div *ngFor="let comment of commentList">
+    <mat-card class="commentCard">
+      <mat-card-subtitle>Posté par {{ comment.author.name }} </mat-card-subtitle>
+      <p> {{ comment.text }}</p>
+    </mat-card>
+  </div>
   </mat-card-footer>
   </mat-card-content>
 
