@@ -14,7 +14,8 @@ export class Issue {
   imageUrl? : string; // à changer par ImageUrlType si moyen de mettre des limitations
   additionalImagesUrl? : string[]; // à changer par ImageUrlType si moyen de mettre des limitations
   issueTypeHref : IssueTypeReference;
-  location : {};
+  location : {"coordinates": number[],
+              "type": string};
   readonly state : IssueState; 
   tags? : string[];
   readonly updatedAt :  Date;

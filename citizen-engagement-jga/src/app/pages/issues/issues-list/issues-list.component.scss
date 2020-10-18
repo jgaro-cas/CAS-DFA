@@ -1,8 +1,8 @@
 #cardDisplay{
   max-width: 45%;
-  margin: auto;
+  margin: 38px auto;
 }
-  
+
 #title{
   margin: 12px 0;
 }
@@ -33,4 +33,10 @@ mat-chip{
 
 .issueTitle{
   margin-top: 10px;
+}
+
+.map {
+  min-height: 350px;
+  min-width: 500px;
+  margin: auto;
 }

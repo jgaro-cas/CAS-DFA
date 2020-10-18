@@ -14,7 +14,7 @@ import { MatInputModule } from "@angular/material/input";
 import { AppRoutingModule } from './../../app-routing.module';
 import { MatSelectModule } from "@angular/material/select";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 @NgModule({
   declarations: [IssuesListComponent, IssuePageComponent],
@@ -31,7 +31,8 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
     MatInputModule,
     AppRoutingModule,
     MatSelectModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    LeafletModule
   ]
 })
 export class IssuesModule { }

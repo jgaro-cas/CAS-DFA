@@ -6,6 +6,9 @@ import { Issue } from 'src/app/models/issue';
 import { IssueListRequestParam } from 'src/app/models/issue-list-request-param';
 import { PaginationStructure } from 'src/app/models/pagination-structure';
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { latLng, MapOptions, tileLayer, marker,Marker } from 'leaflet';
+import { defaultIcon } from "src/app/models/leaflet/default-marker";
+
 
 @Component({
   selector: 'app-issues-list',
@@ -17,12 +20,25 @@ export class IssuesListComponent implements OnInit {
   faSearch = faSearch;
   issueList: Issue[];
   sortAscending : boolean = true;
-  public issueRequestParam = new IssueListRequestParam;
+  issueRequestParam = new IssueListRequestParam;
+  mapOptions: MapOptions;
+  mapMarkers : Marker[] = [];
 
   @ViewChild(MatPaginator) paginator : MatPaginator;
 
 
-  constructor(private issueService: IssueService, private router : Router) { }
+  constructor(private issueService: IssueService, private router : Router) {
+    this.mapOptions = {
+      layers: [
+        tileLayer(
+          'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+          { maxZoom: 18 }
+        )
+      ],
+      zoom: 13,
+      center: latLng(46.778186, 6.641524)
+    };
+   }
 
   ngOnInit(): void {
     this.issueRequestParam.pagination = new PaginationStructure;
@@ -31,9 +47,9 @@ export class IssuesListComponent implements OnInit {
     this.issueService.loadAllIssues(this.issueRequestParam).subscribe({
       next: (result) => {this.issueList = result.body;
                           this.issueRequestParam.pagination.length = parseInt(result.headers.get("pagination-total"));
+                          this.createMarkerList();
                         },
-      error: (error) => console.log("Erreur", error)
-        
+      error: (error) => console.log("Erreur", error) 
     })
   }
 
@@ -52,6 +68,7 @@ export class IssuesListComponent implements OnInit {
     this.issueService.loadAllIssues(this.issueRequestParam).subscribe({
       next: (result) => {this.issueList = result.body;
                           this.paginator.length = parseInt(result.headers.get("pagination-total"));
+                          this.createMarkerList();
                         },
       error: (error) => console.log("Erreur", error)
     })
@@ -66,4 +83,14 @@ export class IssuesListComponent implements OnInit {
     this.router.navigate([`/Accueil/issues/${issue.id}`]);;
   }
 
+  createMarkerList(){
+    this.mapMarkers = [];
+    this.issueList.forEach(issue => {
+      let latitude : number = issue.location.coordinates[1];
+      let longitude : number = issue.location.coordinates[0];
+      let marker = new Marker([latitude,longitude]);
+
+      this.mapMarkers.push(marker);
+    });
+  }
 }

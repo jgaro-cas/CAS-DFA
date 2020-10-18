@@ -38,8 +38,6 @@
     </mat-card>
   </mat-accordion>
   <mat-card class="card" id="cardDisplay">
-    <div>
-      <p>Affichage carte des issues</p>
-    </div>
+    <div class="map" leaflet [leafletOptions]="mapOptions" [leafletLayers]="mapMarkers"></div>
   </mat-card>
 </div>

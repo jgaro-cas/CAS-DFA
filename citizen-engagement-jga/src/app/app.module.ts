@@ -10,6 +10,8 @@ import { FormsModule } from '@angular/forms';
 import { SecurityModule } from './security/security.module';
 import { ApiTokenInterceptorService } from './api/api-token-interceptor.service';
 
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+
 // Angular material components
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -25,6 +27,7 @@ import { PageAccueilComponent } from './pages/page-accueil/page-accueil.componen
 import {} from './pages/me-page/me-page.module';
 import {} from './pages/users/users.module';
 import {} from './pages/issues/issues.module';
+
 
 @NgModule({
   declarations: [
@@ -46,6 +49,7 @@ import {} from './pages/issues/issues.module';
     MatCheckboxModule,
     MatFormFieldModule,
     MatPaginatorModule,
+    LeafletModule
   ],
   providers: [{provide : HTTP_INTERCEPTORS,
                 useClass : ApiTokenInterceptorService,
