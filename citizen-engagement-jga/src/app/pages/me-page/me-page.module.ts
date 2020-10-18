@@ -7,6 +7,7 @@ import { FormsModule} from '@angular/forms';
 import { MatInputModule } from "@angular/material/input";
 import { MatSelectModule } from "@angular/material/select";
 import { MatCheckboxModule } from "@angular/material/checkbox";
+import { MatCardModule } from "@angular/material/card";
 
 @NgModule({
   declarations: [MePageComponent],
@@ -17,7 +18,8 @@ import { MatCheckboxModule } from "@angular/material/checkbox";
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatCardModule
   ],
   exports: [MePageComponent]
 })
