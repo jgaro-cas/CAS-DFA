@@ -63,7 +63,7 @@ export class IssuesListComponent implements OnInit {
   }
 
   jumpToIssueEdition(issue : Issue){
-    console.log(issue)
+    this.router.navigate([`/Accueil/issues/${issue.id}`]);;
   }
 
 }

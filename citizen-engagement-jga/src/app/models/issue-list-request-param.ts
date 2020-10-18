@@ -3,7 +3,7 @@ import { PaginationStructure } from './pagination-structure';
 
 export type BooleanString = "true" | "false";
                           
-export type IncludeIssuesInfo = "" | "action" | "assignee" | "creator" | "issueType";
+export type IncludeIssuesInfo = "" | "actions" | "assignee" | "creator" | "issueType";
 
 export class IssueListRequestParam {
   pagination : PaginationStructure;

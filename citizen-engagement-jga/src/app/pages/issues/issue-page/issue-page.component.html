@@ -1,0 +1,59 @@
+<mat-card class="card">
+  <mat-card-header>
+      <mat-card-title id="title">Détail du dérengement</mat-card-title>
+      <mat-card-subtitle *ngIf="!newIssueEdition">N° {{ issue.id }}</mat-card-subtitle>
+      <mat-card-subtitle *ngIf="newIssueEdition">Nouveau dérengement</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>Créé le {{ getDate(issue.createdAt) + "  |  "}} Mis à jour le {{ getDate(issue.updatedAt) }}</p>      
+    <p>Créé par <a [routerLink]="['/Accueil', creatorUrl, creatorId]" > {{ creatorName }} </a></p>
+    <p>Assigné à <a [routerLink]="['/Accueil', assigneeUrl, assigneeId]" > {{ assigneeName }} </a></p>
+    <p>Dérengement de type <a [routerLink]="['/Accueil', issueTypeUrl, issueTypeId]" > {{ issueTypeName }} </a> La page cible n'existe pas encore</p>
+    <p>Etat : {{issue.state}} </p>
+      <p> 
+           <mat-button-toggle-group (click)="applyAction()" [(ngModel)]="issueAction.type">
+            <mat-button-toggle value="start">Commencer</mat-button-toggle>
+            <mat-button-toggle value="reject">Rejeter</mat-button-toggle>
+            <mat-button-toggle value="resolve">Terminer</mat-button-toggle>
+          </mat-button-toggle-group>
+      </p>
+    <div class="images">
+      <img [src]="issue.imageUrl" alt="mainImage">
+      <div *ngFor="let imgUrl of issue.additionalImagesUrl">
+        <img class="littleImage"src="imgUrl" alt="Additionnal image">
+      </div>
+    </div>
+    
+    <form #issueForm="ngForm" (ngSubmit)="onSubmit(issueForm)">
+      <mat-form-field class="tagArea" style="width: 90%; margin-bottom: 6px;">
+        <mat-chip-list #tagList >
+          <mat-chip *ngFor="let tag of issue.tags" >{{ tag }}</mat-chip>
+        </mat-chip-list>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-hint>Chaque tag séparé par un espace</mat-hint>
+        <input matInput style="margin-top: 12px;" placeholder="Nouveaux tags :" #tagsInput type="text" [(ngModel)]="tagChain" name="tagList" [disabled]="!editMode">
+      </mat-form-field>
+
+      <mat-form-field class="descriptionArea" apparence="outline" hintLabel="Max 1000 characters">
+        <mat-label>Description</mat-label>
+        <textarea matInput #input placeholder="Description" type="text" maxlength="1000" [(ngModel)]="issue.description" name="Description" required [disabled]="!editMode" cols="120"></textarea>
+        <mat-hint align="end">{{ input.value.length || 0 }} /1000</mat-hint>
+      </mat-form-field>
+      <button mat-raised-button [color]="editButtonColor" (click)="setEditMode()" type="button" *ngIf="!newIssueEdition">{{editButtonText}}</button>
+      <button mat-raised-button style="background-color: green; color: white;" *ngIf="editMode" [disabled]="!issueForm.valid" type="submit">Save</button>
+
+    </form>
+  <hr>
+  <mat-card-actions class="actionComment">
+    <button mat-raised-button [color]="commentButtonColor" (click)="setCommentMode()" *ngIf="!newIssueEdition">{{commentButtonText}}</button>
+  </mat-card-actions>
+
+  <mat-card-footer>
+    Commentaires
+  </mat-card-footer>
+  </mat-card-content>
+
+
+</mat-card>

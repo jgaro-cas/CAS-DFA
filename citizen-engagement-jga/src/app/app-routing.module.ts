@@ -9,6 +9,7 @@ import { UsersListComponent } from "./pages/users/users-list/users-list.componen
 import { UserPageComponent } from './pages/users/user-page/user-page.component';
 import { IssuesListComponent } from "./pages/issues/issues-list/issues-list.component";
 import { User } from './models/user';
+import { IssuePageComponent } from './pages/issues/issue-page/issue-page.component';
 
 const routes: Routes = [
   {path: "", redirectTo: "Accueil", pathMatch: "full"},
@@ -21,7 +22,8 @@ const routes: Routes = [
       {path: "me", component: MePageComponent, canActivate: [AuthGuard]},
       {path: "users", component: UsersListComponent, canActivate: [AuthGuard]},
       {path: "users/:id",component: UserPageComponent, canActivate: [AuthGuard]},
-      {path: "issues", component: IssuesListComponent, canActivate: [AuthGuard]}
+      {path: "issues", component: IssuesListComponent, canActivate: [AuthGuard]},
+      {path: "issues/:id", component: IssuePageComponent, canActivate: [AuthGuard]}
     ]}
 ];
 

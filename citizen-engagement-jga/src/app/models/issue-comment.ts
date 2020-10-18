@@ -1,6 +1,6 @@
 export class IssueComment {
-  readonly authoerHref : string;
-  readonly createdAt : Date;
-  readonly id : string;
+  authorHref : string;
+  createdAt : Date;
+  id : string;
   text : string;
 }

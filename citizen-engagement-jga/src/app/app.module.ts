@@ -30,7 +30,7 @@ import {} from './pages/issues/issues.module';
   declarations: [
     AppComponent,
     DummyPageComponent,
-    PageAccueilComponent
+    PageAccueilComponent,
   ],
   imports: [
     BrowserModule,
