@@ -5,6 +5,7 @@
 
 .descriptionArea{
   width: 90%;
+  margin-top: 20px;
 }
 
 .images{
@@ -35,4 +36,8 @@
 
 .newCommentCard{
   margin-bottom: 30px;
+}
+
+.mat-button-toggle-label-content {
+  line-height: 32px !important;
 }

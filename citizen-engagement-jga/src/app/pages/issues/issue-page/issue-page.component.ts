@@ -1,4 +1,3 @@
-import { Comment } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { NgForm, NgModel } from '@angular/forms';
 import { ActivatedRoute, Router} from '@angular/router';
@@ -12,6 +11,7 @@ import { IssueListRequestParam } from 'src/app/models/issue-list-request-param';
 import { IssueComment } from "src/app/models/issue-comment";
 import { PaginationStructure } from 'src/app/models/pagination-structure';
 import { CommentStructure } from 'src/app/models/comment-structure';
+import { AuthService } from 'src/app/security/auth.service';
 
 @Component({
   selector: 'app-issue-page',
@@ -47,7 +47,8 @@ export class IssuePageComponent implements OnInit {
 
   constructor(private issueService : IssueService, private route: ActivatedRoute, 
               private router: Router, private userManagement: UsersManagementService,
-              private issueTypeService : IssueTypeService) { 
+              private issueTypeService : IssueTypeService,
+              public auth : AuthService) { 
 
     this.route.paramMap.subscribe(
       param => this.receivedId = param.get('id'));

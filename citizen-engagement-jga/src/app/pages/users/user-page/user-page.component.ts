@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { UsersManagementService } from 'src/app/api/services/users-management.service';
+import { AuthService } from 'src/app/security/auth.service';
 
 @Component({
   selector: 'app-user-page',
@@ -25,7 +26,7 @@ export class UserPageComponent implements OnInit {
   checkCitizen : boolean;
   checkStaff : boolean;
 
-  constructor(private userManagement : UsersManagementService, private route : ActivatedRoute, private router : Router) {
+  constructor(private userManagement : UsersManagementService, private route : ActivatedRoute, private router : Router, public auth : AuthService) {
       this.route.paramMap.subscribe(
         param => this.receivedId = param.get('id'));
       

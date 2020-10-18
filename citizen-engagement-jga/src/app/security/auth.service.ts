@@ -20,6 +20,9 @@ export class AuthService {
    * It will act as a sort of local "cache" for the AuthResponse object value.
    */
   private authenticated$: ReplaySubject<AuthResponse>;
+  private staffStatus: boolean;
+  private citizenStatus: boolean;
+  private name: string;
 
   constructor(private http: HttpClient) { 
     const savedAuth = JSON.parse(
@@ -32,6 +35,10 @@ export class AuthService {
 
   isAuthenticated(): Observable<boolean>{
     return this.authenticated$.pipe(
+      tap((auth) => {this.citizenStatus = auth.user.roles.indexOf("citizen") > -1;
+                      this.staffStatus = auth.user.roles.indexOf("staff") > -1;
+                      this.name = auth.user.name;
+                    }),
       map((auth) => Boolean(auth)));
   }
 
@@ -45,10 +52,16 @@ export class AuthService {
       map((auth) => (auth ? auth.token : undefined)));
   }
 
-  getStaffStatus(): Observable<boolean>{
-    return this.authenticated$.pipe(
-      map((auth) => (auth.user.roles.indexOf("staff") > -1 ? true : false))
-    );
+  getStaffStatus(){
+    return this.staffStatus;
+  }
+
+  getCitizenStatus(){
+    return this.citizenStatus;
+  }
+
+  getUserName(){
+    return this.name;
   }
 
   login(authRequest: AuthRequest): Observable<User> {

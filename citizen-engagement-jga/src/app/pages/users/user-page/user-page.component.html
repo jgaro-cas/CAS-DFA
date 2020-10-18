@@ -43,7 +43,7 @@
         </section>
 <!--[checked]="getRoleCitizen()"
 [checked]="getRoleStaff()" -->
-        <button mat-raised-button [color]="editButtonColor" (click)="setEditMode()" type="button" *ngIf="!newUserEdition">{{editButtonText}}</button>
+        <button mat-raised-button [color]="editButtonColor" (click)="setEditMode()" type="button" *ngIf="!newUserEdition && auth.getStaffStatus()">{{editButtonText}}</button>
         <button mat-raised-button style="background-color: green; color: white;" *ngIf="editMode" [disabled]="!userForm.valid" type="submit">Save</button>
     
       </form>
