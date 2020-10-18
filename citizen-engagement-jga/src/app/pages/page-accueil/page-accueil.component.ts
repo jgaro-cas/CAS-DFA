@@ -15,17 +15,6 @@ export class PageAccueilComponent implements OnInit {
   constructor(private auth : AuthService) { }
 
   ngOnInit(): void {
-/*    this.auth.isAuthenticated().subscribe({
-      next : (result) => this.logged = result
-    })
-    
-    this.auth.getStaffStatus().subscribe({
-      next : (result) => {this.staffUser = result;
-                          console.log(result);
-      }
-              
-    });
-  }
-*/  
+
   }
 }

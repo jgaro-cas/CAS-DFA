@@ -7,10 +7,9 @@ import { MatCardModule } from "@angular/material/card";
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { SignInPageComponent } from './sign-in-page/sign-in-page.component';
 
 @NgModule({
-  declarations: [LoginPageComponent, LogoutButtonComponent, SignInPageComponent],
+  declarations: [LoginPageComponent, LogoutButtonComponent],
   imports: [
     CommonModule,
     FormsModule,

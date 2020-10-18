@@ -49,17 +49,12 @@ export class UserPageComponent implements OnInit {
     }
   }
 
-  displayUser(){
-    console.log("User :", this.user);
-  }
-
   getUserFirstLastName(){
     return this.newUserEdition ? `${this.user.firstname} ${this.user.lastname}` : `Nouvel utilisateur`;
   }
 
   onSubmit(datas : NgForm){
     Object.assign(this.user, datas.value);
-    console.log(this.user);
     if (this.newUserEdition === true){
       if (this.checkCitizen === true){
         this.user.roles.push("citizen");

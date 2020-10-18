@@ -12,6 +12,8 @@ import { IssueComment } from "src/app/models/issue-comment";
 import { PaginationStructure } from 'src/app/models/pagination-structure';
 import { CommentStructure } from 'src/app/models/comment-structure';
 import { AuthService } from 'src/app/security/auth.service';
+import { IssueType } from 'src/app/models/issue-type';
+import { GeoStructure } from "src/app/models/geo-structure";
 
 @Component({
   selector: 'app-issue-page',
@@ -44,7 +46,9 @@ export class IssuePageComponent implements OnInit {
   commentButtonColor: string = "primary";
   commentList: IssueComment[];
   newComment = new CommentStructure;
-
+  issueTypePagination = new PaginationStructure;
+  issueTypeList: IssueType[] = [];
+ 
   constructor(private issueService : IssueService, private route: ActivatedRoute, 
               private router: Router, private userManagement: UsersManagementService,
               private issueTypeService : IssueTypeService,
@@ -64,13 +68,24 @@ export class IssuePageComponent implements OnInit {
       this.commentRequestComplement.pagination.pageSize = 50;
       this.loadIssue();
       this.loadComments();
+    } else{
+      this.issueTypePagination.page=1;
+      this.issueTypePagination.pageSize=50
+      this.newIssueEdition = true;
+      this.editMode = true;
+      this.loadIssueType();
     }
   }
 
   onSubmit(datas : NgForm){
-    
     if(this.newIssueEdition === true){
-
+      let geo : GeoStructure = {coordinates : [6.632, 46.7766],
+                                type: "Point"};
+      this.issue.location = geo;
+      this.issueService.createNewIssue(this.issue).subscribe({
+        next: () => this.router.navigate(['/Accueil/issues']),
+        error: (error) => console.log("Erreur", error)
+      });
     }else{
       this.addTags(this.tagChain);
       this.issueService.updateIssue(this.issue.id, this.issue).subscribe({
@@ -84,21 +99,24 @@ export class IssuePageComponent implements OnInit {
     this.issueService.loadSpecificIssue(this.receivedId, this.issueRequestComplement.include).subscribe({
       next: (result) => {this.issue = result;
                           this.extractIssueIncludes(result);
-                          console.log(result);
       },
       error: () => this.router.navigate(['/Accueil/issues'])
     });
-
   }
 
   loadComments(){
     this.issueService.loadIssueComment(this.receivedId, this.commentRequestComplement).subscribe({
-      next: (result) => {this.commentList = result;
-                          console.log("Commentlist", this.commentList);},
+      next: (result) => this.commentList = result,
       error: (error) => console.log("Erreur", error)
     });
   }
 
+  loadIssueType(){
+    this.issueTypeService.loadAllIssueTypes(this.issueTypePagination).subscribe({
+      next: (result) => this.issueTypeList = result,
+      error: (error) => console.log("Erreur", error)
+    })
+  }
 
   // Do not work automaticaly.... need to be fixed
   extractIssueIncludes(rawData){
@@ -136,7 +154,6 @@ export class IssuePageComponent implements OnInit {
   }
 
   applyAction(){
-    console.log(this.issueAction);
     this.issueService.createIssueAction(this.issue.id, this.issueAction).subscribe({
       next: () => this.loadIssue(),
       error: (error) => console.log("Erreur", error)
@@ -165,15 +182,12 @@ export class IssuePageComponent implements OnInit {
 
   addNewCommentToList(comments : IssueComment[]){
     let commentTemp : IssueComment;
-    console.log("Comment : ", comments);
     comments.forEach(comment => {
       commentTemp = comment;
     });
   }
 
   onCommentSubmit(datas : NgForm){
-    console.log(datas);
-    console.log("Texte :", this.newComment);
     this.issueService.createIssueComment(this.issue.id, this.newComment).subscribe({
       next: () => {this.loadComments();
                   this.setCommentMode();},

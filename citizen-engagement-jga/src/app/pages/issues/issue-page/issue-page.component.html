@@ -5,12 +5,17 @@
       <mat-card-subtitle *ngIf="newIssueEdition">Nouveau dérengement</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <p>Créé le {{ getDate(issue.createdAt) + "  |  "}} Mis à jour le {{ getDate(issue.updatedAt) }}</p>      
-    <p>Créé par <a [routerLink]="['/Accueil', creatorUrl, creatorId]" > {{ creatorName }} </a></p>
-    <p>Assigné à <a [routerLink]="['/Accueil', assigneeUrl, assigneeId]" > {{ assigneeName }} </a></p>
-    <p>Dérengement de type <a [routerLink]="['/Accueil', issueTypeUrl, issueTypeId]" > {{ issueTypeName }} </a> <strong>La page cible n'existe pas encore</strong></p>
-    <p>Etat : {{issue.state}} </p>
-      <p> 
+    <p *ngIf="!newIssueEdition">Créé le {{ getDate(issue.createdAt) + "  |  "}} Mis à jour le {{ getDate(issue.updatedAt) }}</p>      
+    <p *ngIf="!newIssueEdition">Créé par <a [routerLink]="['/Accueil', creatorUrl, creatorId]" > {{ creatorName }} </a></p>
+    <p *ngIf="!newIssueEdition">Assigné à <a [routerLink]="['/Accueil', assigneeUrl, assigneeId]" > {{ assigneeName }} </a></p>
+    <p *ngIf="!newIssueEdition">Dérengement de type <a [routerLink]="['/Accueil', issueTypeUrl, issueTypeId]" > {{ issueTypeName }} </a> <strong>La page cible n'existe pas encore</strong></p>
+    <p *ngIf="newIssueEdition">Dérengement de type 
+      <mat-select [(ngModel)]="issue.issueTypeHref"> 
+        <mat-option *ngFor="let issueType of issueTypeList" value="{{issueType.href}}"> {{ issueType.name }}</mat-option>
+      </mat-select> 
+    </p>
+    <p *ngIf="!newIssueEdition">Etat : {{issue.state}} </p>
+      <p *ngIf="!newIssueEdition"> 
            <mat-button-toggle-group id="toggleButton" (click)="applyAction()" *ngIf="auth.getStaffStatus()" [(ngModel)]="issueAction.type">
             <mat-button-toggle value="start">Commencer</mat-button-toggle>
             <mat-button-toggle value="reject">Rejeter</mat-button-toggle>

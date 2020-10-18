@@ -35,6 +35,15 @@ mat-chip{
   margin-top: 10px;
 }
 
+.cardFooter{
+  display: flex;
+  justify-content: space-between;
+}
+.footerLeft{
+  padding-left: 16px;
+}
+
+
 .map {
   min-height: 350px;
   min-width: 500px;

@@ -76,7 +76,7 @@ export class IssuesListComponent implements OnInit {
   }
 
   jumpToIssueCreation(){
-    ;
+    this.router.navigate([`/Accueil/issues/new`]);
   }
 
   jumpToIssueEdition(issue : Issue){
